@@ -1,0 +1,58 @@
+{{!< default}}
+{{!-- Template Name: Writing --}}
+
+<div class="writing-page">
+  <div class="inner">
+
+    <header class="page-hdr">
+      <h1 class="page-title">Writing</h1>
+      <p class="page-desc">Essays and observations on the things I find interesting to talk about.</p>
+    </header>
+
+    {{!-- Filter OUT posts tagged 'list' so they only appear on the Lists page --}}
+    {{#get "posts" filter="tag:-list" limit="all" order="published_at desc"}}
+      {{#if posts}}
+      <ul class="post-list">
+        {{#foreach posts}}
+        <li class="post-row">
+          <div class="pr-left">
+            <a href="{{url}}" class="pr-title">{{title}}</a>
+            {{#if custom_excerpt}}<p class="pr-ex">{{custom_excerpt}}</p>{{else}}<p class="pr-ex">{{excerpt words="18"}}</p>{{/if}}
+          </div>
+          <time class="pr-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="MMM YYYY"}}</time>
+        </li>
+        {{/foreach}}
+      </ul>
+      {{else}}
+      <p class="empty-msg">Nothing published yet.</p>
+      {{/if}}
+    {{/get}}
+
+    <div class="writing-nl">
+      <h3 class="writing-nl-title">Stay in the loop</h3>
+      <p class="writing-nl-desc">Receive new essays sent directly to your inbox when published.</p>
+      {{#unless @member}}
+      <form class="sub-form" data-members-form="subscribe" novalidate>
+        <div class="sub-row">
+          <input class="sub-input" type="email" name="email" placeholder="your@email.com" required autocomplete="email">
+          <button class="sub-btn" type="submit">
+            <span class="sub-label">Subscribe</span>
+            <span class="sub-loading" hidden>…</span>
+          </button>
+        </div>
+        <p class="sub-meta">Free. Unsubscribe anytime.</p>
+      </form>
+      <div class="sub-success" hidden>
+        <p class="sub-success-msg">✓ Check your inbox to confirm your subscription.</p>
+        <p class="sub-success-sub">Can't find it? Check your spam folder.</p>
+      </div>
+      <div class="sub-error" hidden>
+        <p class="sub-error-msg">Something went wrong, please try again.</p>
+      </div>
+      {{else}}
+      <p class="member-note">✓ You're subscribed.</p>
+      {{/unless}}
+    </div>
+
+  </div>
+</div>

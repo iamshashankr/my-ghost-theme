@@ -1,0 +1,46 @@
+{{!< default}}
+{{!-- Template Name: Bullets --}}
+
+<div class="bullets-page">
+  <div class="inner">
+
+    <header class="page-hdr">
+      <h1 class="page-title">Bullets</h1>
+      <p class="page-desc">Short posts, quick thoughts, and things I'd otherwise put on LinkedIn — kept here too.</p>
+    </header>
+
+    {{#get "posts" filter="tag:bullet" limit="all" order="published_at desc" include="tags"}}
+
+      {{#if posts}}
+      <div class="bullets-grid">
+        {{#foreach posts}}
+        <article class="bullet-card">
+          <a href="{{url}}" class="bullet-card-link" aria-label="{{title}}"></a>
+          <div class="bullet-card-inner">
+            <div class="bullet-card-top">
+              <time class="bullet-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="MMM D, YYYY"}}</time>
+            </div>
+            <h2 class="bullet-title">{{title}}</h2>
+            {{#if custom_excerpt}}
+              <p class="bullet-excerpt">{{custom_excerpt}}</p>
+            {{else}}
+              <p class="bullet-excerpt">{{excerpt words="24"}}</p>
+            {{/if}}
+            <span class="bullet-arrow">→</span>
+          </div>
+        </article>
+        {{/foreach}}
+      </div>
+
+      {{else}}
+
+      <div class="bullets-empty">
+        <p>You can read some <a href="https://www.linkedin.com/in/rshaashank/recent-activity/all/" target="_blank" rel="noopener noreferrer">here</a> till the time I fill this up. :)</p>
+      </div>
+
+      {{/if}}
+
+    {{/get}}
+
+  </div>
+</div>

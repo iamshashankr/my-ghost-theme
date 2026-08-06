@@ -1,0 +1,66 @@
+name: Deploy Ghost Theme
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Read theme name from package.json
+        id: theme
+        run: echo "name=$(node -p "require('./package.json').name")" >> "$GITHUB_OUTPUT"
+
+      - name: Zip theme
+        run: |
+          mkdir -p /tmp/build
+          zip -r "/tmp/build/${{ steps.theme.outputs.name }}.zip" . \
+            -x ".git/*" \
+            -x ".github/*" \
+            -x "node_modules/*" \
+            -x "*.DS_Store"
+
+      - name: Generate Ghost Admin API token
+        id: token
+        run: |
+          npm install jsonwebtoken --no-save
+          node -e "
+            const jwt = require('jsonwebtoken');
+            const [id, secret] = process.env.GHOST_ADMIN_API_KEY.split(':');
+            const token = jwt.sign({}, Buffer.from(secret, 'hex'), {
+              keyid: id,
+              algorithm: 'HS256',
+              expiresIn: '5m',
+              audience: '/admin/'
+            });
+            console.log('token=' + token);
+          " >> "$GITHUB_OUTPUT"
+        env:
+          GHOST_ADMIN_API_KEY: ${{ secrets.GHOST_ADMIN_API_KEY }}
+
+      - name: Upload theme to Ghost
+        id: upload
+        run: |
+          RESPONSE=$(curl -s -X POST "${{ secrets.GHOST_API_URL }}/ghost/api/admin/themes/upload/" \
+            -H "Authorization: Ghost ${{ steps.token.outputs.token }}" \
+            -F "file=@/tmp/build/${{ steps.theme.outputs.name }}.zip;type=application/zip;filename=${{ steps.theme.outputs.name }}.zip")
+          echo "$RESPONSE"
+          if echo "$RESPONSE" | grep -q '"errors"'; then
+            echo "Ghost rejected the theme upload:"
+            echo "$RESPONSE"
+            exit 1
+          fi
+
+      - name: Activate theme
+        run: |
+          curl -s -X PUT "${{ secrets.GHOST_API_URL }}/ghost/api/admin/themes/${{ steps.theme.outputs.name }}/activate/" \
+            -H "Authorization: Ghost ${{ steps.token.outputs.token }}"

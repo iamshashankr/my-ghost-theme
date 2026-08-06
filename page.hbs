@@ -1,0 +1,11 @@
+{{!< default}}
+<div class="generic-page inner">
+  {{#if @page.show_title_and_feature_image}}
+    {{#if feature_image}}<div class="page-img"><img src="{{img_url feature_image size="l"}}" alt="{{title}}"></div>{{/if}}
+    <header class="page-hdr"><h1 class="page-title">{{title}}</h1>{{#if custom_excerpt}}<p class="page-desc">{{custom_excerpt}}</p>{{/if}}</header>
+  {{else}}
+    <header class="page-hdr"><h1 class="page-title">{{title}}</h1>{{#if custom_excerpt}}<p class="page-desc">{{custom_excerpt}}</p>{{/if}}</header>
+    {{#if feature_image}}<div class="page-img"><img src="{{img_url feature_image size="l"}}" alt="{{title}}"></div>{{/if}}
+  {{/if}}
+  <div class="gh-content">{{content}}</div>
+</div>

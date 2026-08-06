@@ -1,0 +1,116 @@
+{{!< default}}
+{{!-- Template Name: About --}}
+
+<div class="about-page">
+  <div class="inner">
+
+    {{#if feature_image}}
+    <div class="about-photo">
+      <img src="{{img_url feature_image size="l"}}" alt="Shashank R" loading="eager">
+    </div>
+    {{else}}
+    <div class="about-photo">
+      <img src="{{asset 'images/avatar.jpg'}}" alt="Shashank R" loading="eager">
+    </div>
+    {{/if}}
+
+    <div class="about-body">
+
+      <p>Hi. Thanks for being here. I'm Shashank, a digital writer working at the intersection of writing, marketing, and how people show up online. This is my space on the internet where I think, document what I'm learning, and try to make sense of things as I go.</p>
+
+      <h3>Work</h3>
+
+      <p>I didn't start here with a clear plan. I moved to Bangalore after school, studied engineering, and somewhere along the way realised I wasn't building towards something I actually wanted. Writing started as a side thing, a way to make some money, but it slowly became the one thing that kept pulling me back.</p>
+
+      <p>The early years were a mix of trying things, switching directions, and figuring out what fit. I worked across content and marketing roles, spent close to two years at <a href="https://www.thetesttribe.com/" target="_blank" rel="noopener noreferrer">The Test Tribe</a> understanding communities and events, and kept writing consistently through all of it.</p>
+
+      <p>Today, I work at <a href="https://www.growedin.com/" target="_blank" rel="noopener noreferrer">GrowedIn</a>, where I help executives and companies build their reputation and presence on LinkedIn. A big part of my work is helping people say what they actually mean, in a way that others can understand and trust.</p>
+
+      <h3>Life</h3>
+
+      <p>Outside of work, things are simple. I prefer a small circle over big crowds. I like spending time with people who feel easy to be around. Most weekends are slow, usually watching movies or shows, sometimes reading, sometimes just switching off.</p>
+
+      <p>I enjoy things that don't ask for too much but still feel fun. Arcades, games, long conversations, that kind of time.</p>
+
+      <h3>This Space</h3>
+
+      <p>The idea didn't start as a website. It started with a simple thought: I wanted a place to put things. Somewhere that felt like my own.</p>
+
+      <p>I'm still a student when it comes to writing. Most of what I share is me trying to understand something better. This is where I keep that, without any fixed schedule, or pressure to be consistent.</p>
+
+      <p>It took me longer than it should have to start this. I kept putting it off, thinking it needed more time, more planning. <a href="https://keyurkumbhare.com/" target="_blank" rel="noopener noreferrer">Keyur</a> kept pushing me for long enough that eventually I just started. Thanks to him. To my surprise this site came together faster than I expected. Built using <a href="https://claude.ai/" target="_blank" rel="noopener noreferrer">Claude</a>, with <a href="https://ghost.org/" target="_blank" rel="noopener noreferrer">Ghost</a> and <a href="https://www.magicpages.co/" target="_blank" rel="noopener noreferrer">Magic Pages</a> handling the backend. Kept it simple, and close to how I wanted it to feel. This version went live on 19th April 2026. I'll keep tweaking things as I go.</p>
+
+      <p>This is my little corner on the internet.</p>
+
+      <p>You're always welcome here.</p>
+
+    </div>
+
+    {{!-- ── NOW (same layout as homepage) ── --}}
+    {{!-- ✏️ EDIT: Update labels, titles, metas to match current status --}}
+    <section class="about-now">
+      <p class="sect-label">Now</p>
+      <div class="now-grid">
+
+        <a href="https://austinkleon.com/keepgoing/" class="now-card">
+          <div class="now-cover">
+            <img src="{{asset 'images/now-reading.jpg'}}" alt="Keep Going" loading="lazy">
+          </div>
+          <div class="now-info">
+            <span class="now-label">Reading</span>
+            <span class="now-title">Keep Going</span>
+            <span class="now-meta">by Austin Kleon</span>
+          </div>
+        </a>
+
+        <a href="https://www.imdb.com/title/tt35823838/" class="now-card">
+          <div class="now-cover">
+            <img src="{{asset 'images/now-watching.jpg'}}" alt="Not Suitable for Work" loading="lazy">
+          </div>
+          <div class="now-info">
+            <span class="now-label">Watching</span>
+            <span class="now-title">Not Suitable for Work</span>
+            <span class="now-meta">A story of 5 work-obsessed 20-somethings living.</span>
+          </div>
+        </a>
+
+        <a href="https://podcasts.apple.com/us/podcast/criminal/id809264944" class="now-card">
+          <div class="now-cover">
+            <img src="{{asset 'images/now-listening.jpg'}}" alt="Criminal" loading="lazy">
+          </div>
+          <div class="now-info">
+            <span class="now-label">Listening To</span>
+            <span class="now-title">Criminal</span>
+            <span class="now-meta">Interesting crime stories, hosted by Phoebe Judge.</span>
+          </div>
+        </a>
+
+        <a href="https://www.growedin.com/" target="_blank" rel="noopener noreferrer" class="now-card">
+          <div class="now-cover">
+            <img src="{{asset 'images/now-working.jpg'}}" alt="GrowedIn" loading="lazy">
+          </div>
+          <div class="now-info">
+            <span class="now-label">Working At</span>
+            <span class="now-title">GrowedIn</span>
+            <span class="now-meta">A LinkedIn-only company for executives and enterprises</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <div class="sect-divider"></div>
+
+    {{!-- ✏️ EDIT: Contact --}}
+    <section class="about-sect about-contact">
+      <p class="sect-label">Get in Touch</p>
+      <p class="contact-p">
+        Best way is email, <a href="mailto:hi@shaashank.com">here</a>. You can also find me on
+        <a href="https://www.instagram.com/iamshaanks" target="_blank" rel="noopener noreferrer">Instagram</a> and
+        <a href="https://www.linkedin.com/in/rshaashank/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.
+        If you read something here and want to talk about it, feel free to reach out.
+      </p>
+    </section>
+
+  </div>
+</div>

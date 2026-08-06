@@ -1,0 +1,6 @@
+{{!< default}}
+<div class="tag-page"><div class="inner">
+  <header class="page-hdr"><p class="page-eyebrow"><a href="/writing">← Writing</a></p><h1 class="page-title">#{{name}}</h1>{{#if description}}<p class="page-desc">{{description}}</p>{{/if}}</header>
+  <ul class="post-list">{{#foreach posts}}<li class="post-row"><div class="pr-left"><a href="{{url}}" class="pr-title">{{title}}</a>{{#if custom_excerpt}}<p class="pr-ex">{{custom_excerpt}}</p>{{/if}}</div><time class="pr-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="MMM YYYY"}}</time></li>{{/foreach}}</ul>
+  {{pagination}}
+</div></div>

@@ -1,0 +1,84 @@
+{{!< default}}
+{{!-- Template Name: Lists --}}
+
+{{!-- ════════════════════════════════════════
+  LISTS PAGE  |  slug: "lists"
+
+  HOW TO ADD/EDIT LISTS (Ghost Admin only):
+  1. Posts → New post
+  2. Write the list title
+  3. In the body: add a bullet list, numbered list, or plain paragraphs
+     — whatever the Ghost editor gives you, it renders cleanly here
+  4. Tags → add tag: list
+  5. Excerpt → type the year (e.g. 2025) — this becomes the year heading
+  6. Publish
+  → Appears automatically on this page, grouped by year
+════════════════════════════════════════ --}}
+
+<div class="lists-page">
+  <div class="inner">
+
+    <header class="page-hdr">
+      <h1 class="page-title">Lists</h1>
+      <p class="page-desc">Everything from values and things I do for fun, to books I'm reading, movies or shows I'm watching, music I'm listening to, and anything else I feel like making a list.</p>
+    </header>
+
+    {{#get "posts" filter="tag:list" limit="all" order="published_at desc" include="tags"}}
+
+      {{#if posts}}
+
+        {{!-- Group by year (from Excerpt field) --}}
+        {{!-- We render all posts; JS groups them client-side by year --}}
+        <div class="lists-feed" id="listsFeed">
+          {{#foreach posts}}
+          <article class="list-entry" data-year="{{#if custom_excerpt}}{{custom_excerpt}}{{else}}{{date format="YYYY"}}{{/if}}">
+            <h2 class="list-entry-title">{{title}}</h2>
+            <div class="list-entry-body">
+              {{content}}
+            </div>
+          </article>
+          {{/foreach}}
+        </div>
+
+      {{else}}
+
+        <div class="lists-empty">
+          <p>No lists yet — create a post in Ghost Admin, tag it <code>list</code>, and it'll appear here.</p>
+        </div>
+
+      {{/if}}
+
+    {{/get}}
+
+  </div>
+</div>
+
+<script>
+// Group list entries under year headings client-side
+(function(){
+  var feed = document.getElementById('listsFeed');
+  if(!feed) return;
+  var entries = Array.from(feed.querySelectorAll('.list-entry'));
+  if(!entries.length) return;
+
+  var grouped = {};
+  var order = [];
+  entries.forEach(function(el){
+    var yr = el.getAttribute('data-year') || '—';
+    if(!grouped[yr]){ grouped[yr]=[]; order.push(yr); }
+    grouped[yr].push(el);
+  });
+
+  feed.innerHTML = '';
+  order.forEach(function(yr){
+    var section = document.createElement('div');
+    section.className = 'lists-year-section';
+    var heading = document.createElement('h2');
+    heading.className = 'lists-year-heading';
+    heading.textContent = yr;
+    section.appendChild(heading);
+    grouped[yr].forEach(function(el){ section.appendChild(el); });
+    feed.appendChild(section);
+  });
+})();
+</script>

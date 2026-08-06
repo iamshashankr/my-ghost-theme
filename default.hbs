@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}" data-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{meta_title}}</title>
+    <meta property="og:site_name" content="{{@site.title}}">
+    <meta property="og:type" content="{{#is "post"}}article{{else}}website{{/is}}">
+    <meta property="og:title" content="{{meta_title}}">
+    <meta property="og:url" content="{{url absolute="true"}}">
+    {{#if @site.cover_image}}<meta property="og:image" content="{{@site.cover_image}}">{{/if}}
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{asset 'css/screen.css'}}">
+    {{ghost_head}}
+</head>
+<body class="{{body_class}}">
+<div class="site-wrapper">
+
+    <header class="site-header">
+        <div class="hdr-inner">
+            <a href="{{@site.url}}" class="nav-logo" title="Home">
+                <span class="logo-bg" aria-hidden="true"></span>
+                <span class="logo-img" aria-hidden="true">
+                    <img src="{{asset 'images/avatar-sm.jpg'}}" alt="Shashank R" loading="lazy">
+                </span>
+            </a>
+            <nav class="site-nav" aria-label="Main navigation">{{navigation}}</nav>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <span class="toggle-track"><span class="toggle-icon"></span></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="site-main">{{{body}}}</main>
+
+    <footer class="site-footer">
+        <div class="inner">
+            <div class="footer-left">
+                <span class="footer-copy">Shashank R · Bengaluru</span>
+                <span class="footer-meta" id="footerMeta"></span>
+            </div>
+            <div class="footer-links">
+                <a href="https://www.instagram.com/iamshaanks" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://www.linkedin.com/in/meshashankr/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+</div>
+<script src="{{asset 'js/main.js'}}"></script>
+{{ghost_foot}}
+</body>
+</html>

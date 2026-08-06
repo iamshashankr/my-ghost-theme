@@ -1,0 +1,139 @@
+{{!< default}}
+
+<div class="home-page">
+  <div class="inner">
+
+    {{!-- ── HERO: centered, updated bio ── --}}
+    <section class="hero">
+      <div class="hero-avatar">
+        <img src="{{asset 'images/avatar-sm.jpg'}}" alt="Shashank R" loading="eager">
+      </div>
+      <div class="hero-body">
+        <p class="hero-p">Hi, I'm Shashank. This is my little corner of the internet where I document thoughts on things I find interesting. I started writing around 18 as a way to make some extra bucks, somewhere along the way, it stopped being a side thing and became the thing. Today, writing is what lets me earn, create, and design my life on my own terms. <a href="/about">More →</a></p>
+      </div>
+    </section>
+
+    {{!-- ── START HERE: featured posts only ── --}}
+    {{#get "posts" filter="featured:true+tag:-list" limit="5" order="published_at desc"}}
+      {{#if posts}}
+      <section class="home-section">
+        <div class="section-top"><span class="sl">Start Here</span></div>
+        <ul class="post-list">
+          {{#foreach posts}}
+          <li class="post-row">
+            <div class="pr-left">
+              <a href="{{url}}" class="pr-title">{{title}}</a>
+              {{#if custom_excerpt}}<p class="pr-ex">{{custom_excerpt}}</p>{{else}}<p class="pr-ex">{{excerpt words="14"}}</p>{{/if}}
+            </div>
+            <time class="pr-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="MMM YYYY"}}</time>
+          </li>
+          {{/foreach}}
+        </ul>
+      </section>
+      {{/if}}
+    {{/get}}
+
+    {{!-- ── RECENT WRITING: exclude list-tagged posts ── --}}
+    {{#get "posts" filter="tag:-list+featured:false" limit="6" order="published_at desc"}}
+    <section class="home-section">
+      <div class="section-top">
+        <span class="sl">Recent Writing</span>
+        <a href="/writing" class="sa">All posts →</a>
+      </div>
+      <ul class="post-list">
+        {{#foreach posts}}
+        <li class="post-row">
+          <div class="pr-left">
+            <a href="{{url}}" class="pr-title">{{title}}</a>
+            {{#if custom_excerpt}}<p class="pr-ex">{{custom_excerpt}}</p>{{else}}<p class="pr-ex">{{excerpt words="14"}}</p>{{/if}}
+          </div>
+          <time class="pr-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="MMM YYYY"}}</time>
+        </li>
+        {{/foreach}}
+      </ul>
+    </section>
+    {{/get}}
+
+    {{!-- ── NOW: 2×2 grid, full images, no cropping ── --}}
+    <section class="home-section">
+      <div class="section-top">
+        <span class="sl">Now</span>
+      </div>
+      <div class="now-grid">
+
+        <a href="https://austinkleon.com/keepgoing/" class="now-card">
+          <div class="now-cover">
+            <img src="{{asset 'images/now-reading.jpg'}}" alt="Keep Going" loading="lazy">
+          </div>
+          <div class="now-info">
+            <span class="now-label">Reading</span>
+            <span class="now-title">Keep Going</span>
+            <span class="now-meta">by Austin Kleon</span>
+          </div>
+        </a>
+
+        <a href="https://www.imdb.com/title/tt35823838/" class="now-card">
+          <div class="now-cover">
+            <img src="{{asset 'images/now-watching.jpg'}}" alt="Not Suitable for Work" loading="lazy">
+          </div>
+          <div class="now-info">
+            <span class="now-label">Watching</span>
+            <span class="now-title">Not Suitable for Work</span>
+            <span class="now-meta">A story of 5 work-obsessed 20-somethings living.</span>
+          </div>
+        </a>
+
+        <a href="https://podcasts.apple.com/us/podcast/criminal/id809264944" class="now-card">
+          <div class="now-cover">
+            <img src="{{asset 'images/now-listening.jpg'}}" alt="Criminal" loading="lazy">
+          </div>
+          <div class="now-info">
+            <span class="now-label">Listening To</span>
+            <span class="now-title">Criminal</span>
+            <span class="now-meta">Interesting crime stories, hosted by Phoebe Judge.</span>
+          </div>
+        </a>
+
+        <a href="https://www.growedin.com/" target="_blank" rel="noopener noreferrer" class="now-card">
+          <div class="now-cover">
+            <img src="{{asset 'images/now-working.jpg'}}" alt="GrowedIn" loading="lazy">
+          </div>
+          <div class="now-info">
+            <span class="now-label">Working At</span>
+            <span class="now-title">GrowedIn</span>
+            <span class="now-meta">A LinkedIn-only company for executives and enterprises</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    {{!-- ── SUBSCRIBE: same layout as Writing page ── --}}
+    <section class="home-nl">
+      <h3 class="writing-nl-title">Stay in the loop</h3>
+      <p class="writing-nl-desc">Receive new essays sent directly to your inbox when published.</p>
+      {{#unless @member}}
+      <form class="sub-form" data-members-form="subscribe" novalidate>
+        <div class="sub-row">
+          <input class="sub-input" type="email" name="email" placeholder="your@email.com" required autocomplete="email">
+          <button class="sub-btn" type="submit">
+            <span class="sub-label">Subscribe</span>
+            <span class="sub-loading" hidden>…</span>
+          </button>
+        </div>
+        <p class="sub-meta">Free. Unsubscribe anytime.</p>
+      </form>
+      <div class="sub-success" hidden>
+        <p class="sub-success-msg">✓ Check your inbox to confirm your subscription.</p>
+        <p class="sub-success-sub">Can't find it? Check your spam folder.</p>
+      </div>
+      <div class="sub-error" hidden>
+        <p class="sub-error-msg">Something went wrong, please try again.</p>
+      </div>
+      {{else}}
+      <p class="member-note">✓ You're subscribed.</p>
+      {{/unless}}
+    </section>
+
+  </div>
+</div>

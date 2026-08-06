@@ -1,0 +1,250 @@
+{{!-- ════════════════════════════════════════
+  SHELF DEFAULT CONTENT
+  
+  HOW TO ADD COVER IMAGES:
+  For each shelf-item, set the src of the <img> tag to a direct image URL.
+  Example: src="https://images.amazon.com/.../cover.jpg"
+  Or upload to Ghost and use the hosted URL.
+  
+  If no image src is set, a colored placeholder shows automatically.
+════════════════════════════════════════ --}}
+
+{{!-- ── READING ── --}}
+<section class="shelf-cat">
+  <p class="shelf-cat-label">Reading</p>
+  <div class="shelf-img-grid">
+
+    <div class="shelf-img-card shelf-img-card--featured">
+      {{!-- EDIT: Replace src with actual book cover URL --}}
+      <div class="sic-cover sic-cover--book" style="background:#c8dfc8">
+        <span class="sic-placeholder">📖</span>
+        {{!-- <img src="YOUR_BOOK_COVER_URL_HERE" alt="The Almanack of Naval Ravikant"> --}}
+      </div>
+      <div class="sic-info">
+        <span class="sic-badge">Currently Reading</span>
+        <h3 class="sic-title">The Almanack of Naval Ravikant</h3>
+        <p class="sic-meta">Eric Jorgenson</p>
+        <p class="sic-note">Dense with ideas. Best read slowly, one chapter at a time.</p>
+      </div>
+    </div>
+
+    <div class="shelf-img-card">
+      <div class="sic-cover sic-cover--book" style="background:#e8dcc8">
+        <span class="sic-placeholder">📖</span>
+        {{!-- <img src="YOUR_BOOK_COVER_URL_HERE" alt="Bird by Bird"> --}}
+      </div>
+      <div class="sic-info">
+        <h3 class="sic-title">Bird by Bird</h3>
+        <p class="sic-meta">Anne Lamott</p>
+        <p class="sic-note">The most honest book about writing I've ever read.</p>
+      </div>
+    </div>
+
+    <div class="shelf-img-card">
+      <div class="sic-cover sic-cover--book" style="background:#d8cce8">
+        <span class="sic-placeholder">📖</span>
+        {{!-- <img src="YOUR_BOOK_COVER_URL_HERE" alt="Shoe Dog"> --}}
+      </div>
+      <div class="sic-info">
+        <h3 class="sic-title">Shoe Dog</h3>
+        <p class="sic-meta">Phil Knight</p>
+        <p class="sic-note">A masterclass in narrative non-fiction disguised as a business memoir.</p>
+      </div>
+    </div>
+
+    <div class="shelf-img-card">
+      <div class="sic-cover sic-cover--book" style="background:#e8d8c8">
+        <span class="sic-placeholder">📖</span>
+        {{!-- <img src="YOUR_BOOK_COVER_URL_HERE" alt="The Remains of the Day"> --}}
+      </div>
+      <div class="sic-info">
+        <h3 class="sic-title">The Remains of the Day</h3>
+        <p class="sic-meta">Kazuo Ishiguro</p>
+        <p class="sic-note">On dignity, repression, and the stories we tell ourselves.</p>
+      </div>
+    </div>
+
+    <div class="shelf-img-card">
+      <div class="sic-cover sic-cover--book" style="background:#c8e4e8">
+        <span class="sic-placeholder">📖</span>
+        {{!-- <img src="YOUR_BOOK_COVER_URL_HERE" alt="Range"> --}}
+      </div>
+      <div class="sic-info">
+        <h3 class="sic-title">Range</h3>
+        <p class="sic-meta">David Epstein</p>
+        <p class="sic-note">Why generalists triumph in a specialized world.</p>
+      </div>
+    </div>
+
+    <div class="shelf-img-card">
+      <div class="sic-cover sic-cover--book" style="background:#e8c8c8">
+        <span class="sic-placeholder">📖</span>
+        {{!-- <img src="YOUR_BOOK_COVER_URL_HERE" alt="Letters to a Young Poet"> --}}
+      </div>
+      <div class="sic-info">
+        <h3 class="sic-title">Letters to a Young Poet</h3>
+        <p class="sic-meta">Rainer Maria Rilke</p>
+        <p class="sic-note">Return to this every year. Something new surfaces each time.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{{!-- ── WATCHING ── --}}
+<section class="shelf-cat">
+  <p class="shelf-cat-label">Watching</p>
+  <div class="shelf-img-grid shelf-img-grid--wide">
+
+    <div class="shelf-img-card shelf-img-card--featured">
+      <div class="sic-cover sic-cover--film" style="background:#1a2a3a">
+        <span class="sic-placeholder">🎬</span>
+        {{!-- <img src="YOUR_POSTER_URL_HERE" alt="All We Imagine as Light"> --}}
+      </div>
+      <div class="sic-info">
+        <span class="sic-badge">Watching Now</span>
+        <h3 class="sic-title">All We Imagine as Light</h3>
+        <p class="sic-meta">Payal Kapadia · 2024</p>
+        <p class="sic-note">Quiet, profound, visually stunning. Cinema as poetry.</p>
+      </div>
+    </div>
+
+    <div class="shelf-img-card">
+      <div class="sic-cover sic-cover--film" style="background:#2a1a2a">
+        <span class="sic-placeholder">🎬</span>
+        {{!-- <img src="YOUR_POSTER_URL_HERE" alt="Drive My Car"> --}}
+      </div>
+      <div class="sic-info">
+        <h3 class="sic-title">Drive My Car</h3>
+        <p class="sic-meta">Ryûsuke Hamaguchi · 2021</p>
+        <p class="sic-note">Three hours of grief, theatre, and the art of listening.</p>
+      </div>
+    </div>
+
+    <div class="shelf-img-card">
+      <div class="sic-cover sic-cover--film" style="background:#1a2a1a">
+        <span class="sic-placeholder">🎬</span>
+        {{!-- <img src="YOUR_POSTER_URL_HERE" alt="Paterson"> --}}
+      </div>
+      <div class="sic-info">
+        <h3 class="sic-title">Paterson</h3>
+        <p class="sic-meta">Jim Jarmusch · 2016</p>
+        <p class="sic-note">Finding poetry in ordinary days.</p>
+      </div>
+    </div>
+
+    <div class="shelf-img-card">
+      <div class="sic-cover sic-cover--film" style="background:#2a2a1a">
+        <span class="sic-placeholder">🎬</span>
+        {{!-- <img src="YOUR_POSTER_URL_HERE" alt="Andaz Apna Apna"> --}}
+      </div>
+      <div class="sic-info">
+        <h3 class="sic-title">Andaz Apna Apna</h3>
+        <p class="sic-meta">Rajkumar Santoshi · 1994</p>
+        <p class="sic-note">A film I've seen too many times to count and will watch again.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{{!-- ── LISTENING ── --}}
+<section class="shelf-cat">
+  <p class="shelf-cat-label">Listening To</p>
+  <div class="shelf-img-grid">
+
+    <div class="shelf-img-card shelf-img-card--featured">
+      <div class="sic-cover sic-cover--album" style="background:#1a1a2a">
+        <span class="sic-placeholder">🎵</span>
+        {{!-- <img src="YOUR_ALBUM_ART_URL_HERE" alt="Ref:rain"> --}}
+      </div>
+      <div class="sic-info">
+        <span class="sic-badge">On Repeat</span>
+        <h3 class="sic-title">Ref:rain</h3>
+        <p class="sic-meta">Aimer</p>
+        <p class="sic-note">Perfect for writing. Emotional but not distracting.</p>
+      </div>
+    </div>
+
+    <div class="shelf-img-card">
+      <div class="sic-cover sic-cover--album" style="background:#2a1a1a">
+        <span class="sic-placeholder">🎵</span>
+        {{!-- <img src="YOUR_ALBUM_ART_URL_HERE" alt="In Rainbows"> --}}
+      </div>
+      <div class="sic-info">
+        <h3 class="sic-title">In Rainbows</h3>
+        <p class="sic-meta">Radiohead</p>
+        <p class="sic-note">Still one of the best albums ever made.</p>
+      </div>
+    </div>
+
+    <div class="shelf-img-card">
+      <div class="sic-cover sic-cover--album" style="background:#1a2a2a">
+        <span class="sic-placeholder">🎵</span>
+        {{!-- <img src="YOUR_ALBUM_ART_URL_HERE" alt="For Emma, Forever Ago"> --}}
+      </div>
+      <div class="sic-info">
+        <h3 class="sic-title">For Emma, Forever Ago</h3>
+        <p class="sic-meta">Bon Iver</p>
+        <p class="sic-note">For rainy Bengaluru evenings.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{{!-- ── TOOLS ── --}}
+<section class="shelf-cat">
+  <p class="shelf-cat-label">Tools</p>
+  <div class="shelf-img-grid">
+
+    <div class="shelf-img-card">
+      <div class="sic-cover sic-cover--tool" style="background:#1a1a1a">
+        <span class="sic-placeholder">🔧</span>
+        {{!-- <img src="YOUR_TOOL_LOGO_URL_HERE" alt="Notion"> --}}
+      </div>
+      <div class="sic-info">
+        <h3 class="sic-title">Notion</h3>
+        <p class="sic-meta">For everything</p>
+        <p class="sic-note">Notes, drafts, project tracking, reading log.</p>
+      </div>
+    </div>
+
+    <div class="shelf-img-card">
+      <div class="sic-cover sic-cover--tool" style="background:#2a1e14">
+        <span class="sic-placeholder">✏️</span>
+        {{!-- <img src="YOUR_TOOL_LOGO_URL_HERE" alt="Pen and Paper"> --}}
+      </div>
+      <div class="sic-info">
+        <h3 class="sic-title">Pen &amp; Paper</h3>
+        <p class="sic-meta">Analogue thinking</p>
+        <p class="sic-note">Some ideas need to move at the speed of a hand.</p>
+      </div>
+    </div>
+
+    <div class="shelf-img-card">
+      <div class="sic-cover sic-cover--tool" style="background:#0a1a0a">
+        <span class="sic-placeholder">✍️</span>
+        {{!-- <img src="YOUR_TOOL_LOGO_URL_HERE" alt="iA Writer"> --}}
+      </div>
+      <div class="sic-info">
+        <h3 class="sic-title">iA Writer</h3>
+        <p class="sic-meta">For focused drafts</p>
+        <p class="sic-note">Nothing but words. My favourite writing environment.</p>
+      </div>
+    </div>
+
+    <div class="shelf-img-card">
+      <div class="sic-cover sic-cover--tool" style="background:#0a0a1a">
+        <span class="sic-placeholder">👻</span>
+        {{!-- <img src="YOUR_TOOL_LOGO_URL_HERE" alt="Ghost"> --}}
+      </div>
+      <div class="sic-info">
+        <h3 class="sic-title">Ghost</h3>
+        <p class="sic-meta">This site</p>
+        <p class="sic-note">Clean, fast, built for writers.</p>
+      </div>
+    </div>
+
+  </div>
+</section>

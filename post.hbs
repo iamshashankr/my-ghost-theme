@@ -1,0 +1,85 @@
+{{!< default}}
+
+{{!-- ════════════════════════════════════════
+  SINGLE POST — post.hbs
+  {{#post}} wrapper explicitly sets context,
+  fixing the "undefined" content rendering bug.
+════════════════════════════════════════ --}}
+
+{{#post}}
+<article class="single-post">
+
+  <div class="post-bar inner">
+    <a href="/writing" class="post-back">← Writing</a>
+    <time class="post-bar-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="Do MMMM YYYY"}}</time>
+  </div>
+
+  <div class="post-wrap inner">
+
+    <header class="post-hdr">
+      {{#primary_tag}}<a href="{{url}}" class="post-cat">{{name}}</a>{{/primary_tag}}
+      <h1 class="post-title">{{title}}</h1>
+      {{#if custom_excerpt}}<p class="post-sub">{{custom_excerpt}}</p>{{/if}}
+      <div class="post-byline">
+        <div class="byline-left">
+          {{#primary_author}}
+            {{#if profile_image}}
+              <img class="au-avatar" src="{{img_url profile_image size="xxs"}}" alt="{{name}}" loading="lazy">
+            {{/if}}
+            <span class="au-name">by {{name}}</span>
+          {{/primary_author}}
+        </div>
+        <a class="share-btn" href="https://twitter.com/intent/tweet?text={{encode title}}&url={{url absolute="true"}}" target="_blank" rel="noopener noreferrer">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.736-8.849L1.254 2.25H8.08l4.259 5.632L18.244 2.25z"/></svg>
+          Share
+        </a>
+      </div>
+    </header>
+
+    {{#if feature_image}}
+    <figure class="post-img">
+      <img
+        srcset="{{img_url feature_image size="s"}} 300w, {{img_url feature_image size="m"}} 600w, {{img_url feature_image size="l"}} 1000w"
+        sizes="(max-width:680px) calc(100vw - 40px), 568px"
+        src="{{img_url feature_image size="m"}}"
+        alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+        loading="eager">
+      {{#if feature_image_caption}}<figcaption>{{feature_image_caption}}</figcaption>{{/if}}
+    </figure>
+    {{/if}}
+
+    <div class="gh-content post-body">
+      {{content}}
+    </div>
+
+    <footer class="post-foot">
+      <a href="/writing" class="back-link">← Back to Writing</a>
+      {{#if tags}}
+      <div class="post-tags">
+        {{#foreach tags}}<a href="{{url}}" class="tag-chip">{{name}}</a>{{/foreach}}
+      </div>
+      {{/if}}
+    </footer>
+
+  </div>
+
+</article>
+
+{{#if prev_post}}{{#if next_post}}
+<nav class="post-nav inner">
+  {{#if prev_post}}
+  <a class="pag-item" href="{{prev_post.url}}">
+    <span class="pag-dir">← Previous</span>
+    <span class="pag-name">{{prev_post.title}}</span>
+  </a>
+  {{/if}}
+  {{#if next_post}}
+  <a class="pag-item pag-r" href="{{next_post.url}}">
+    <span class="pag-dir">Next →</span>
+    <span class="pag-name">{{next_post.title}}</span>
+  </a>
+  {{/if}}
+</nav>
+{{/if}}{{/if}}
+
+{{/post}}
