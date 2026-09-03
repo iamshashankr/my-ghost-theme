@@ -9,8 +9,8 @@
       <p class="page-desc">Essays and observations on the things I find interesting to talk about.</p>
     </header>
 
-    {{!-- Filter OUT posts tagged 'list' so they only appear on the Lists page --}}
-    {{#get "posts" filter="tag:-list" limit="all" order="published_at desc"}}
+    {{!-- Filter OUT posts tagged 'list' and 'bullet' so they only appear on their own pages --}}
+    {{#get "posts" filter="tag:-list+tag:-bullet" limit="all" order="published_at desc"}}
       {{#if posts}}
       <ul class="post-list">
         {{#foreach posts}}

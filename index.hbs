@@ -14,7 +14,7 @@
     </section>
 
     {{!-- ── START HERE: featured posts only ── --}}
-    {{#get "posts" filter="featured:true+tag:-list" limit="5" order="published_at desc"}}
+    {{#get "posts" filter="featured:true+tag:-list+tag:-bullet" limit="5" order="published_at desc"}}
       {{#if posts}}
       <section class="home-section">
         <div class="section-top"><span class="sl">Start Here</span></div>
@@ -33,8 +33,8 @@
       {{/if}}
     {{/get}}
 
-    {{!-- ── RECENT WRITING: exclude list-tagged posts ── --}}
-    {{#get "posts" filter="tag:-list+featured:false" limit="6" order="published_at desc"}}
+    {{!-- ── RECENT WRITING: exclude list-tagged and bullet-tagged posts ── --}}
+    {{#get "posts" filter="tag:-list+tag:-bullet+featured:false" limit="6" order="published_at desc"}}
     <section class="home-section">
       <div class="section-top">
         <span class="sl">Recent Writing</span>

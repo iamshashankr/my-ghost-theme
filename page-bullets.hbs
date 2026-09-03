@@ -15,7 +15,7 @@
       <div class="bullets-grid">
         {{#foreach posts}}
         <article class="bullet-card">
-          <a href="{{url}}" class="bullet-card-link" aria-label="{{title}}"></a>
+          <a href="{{#if canonical_url}}{{canonical_url}}{{else}}{{url}}{{/if}}" class="bullet-card-link" aria-label="{{title}}" target="_blank" rel="noopener noreferrer"></a>
           <div class="bullet-card-inner">
             <div class="bullet-card-top">
               <time class="bullet-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="MMM D, YYYY"}}</time>
