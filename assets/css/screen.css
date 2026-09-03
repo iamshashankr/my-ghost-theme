@@ -754,7 +754,7 @@ button{cursor:pointer;border:none;background:none;font:inherit}
   font-size: 14px;
   -webkit-line-clamp: 3;
   line-clamp: 3;
-  max-width: 640px;
+  max-width: 560px;
 }
 
 .bullet-arrow {
