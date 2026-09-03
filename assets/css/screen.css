@@ -737,6 +737,24 @@ button{cursor:pointer;border:none;background:none;font:inherit}
   line-height: 1.65;
   color: var(--muted);
   flex: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+}
+
+/* Bento rhythm: every 1st, 4th, 7th... card runs full width */
+.bullet-card:nth-child(3n+1) {
+  grid-column: 1 / -1;
+}
+
+.bullet-card:nth-child(3n+1) .bullet-title { font-size: 18px; }
+.bullet-card:nth-child(3n+1) .bullet-excerpt {
+  font-size: 14px;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  max-width: 640px;
 }
 
 .bullet-arrow {
