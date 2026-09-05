@@ -105,7 +105,10 @@ button{cursor:pointer;border:none;background:none;font:inherit}
 .pr-title{font-size:14.5px;font-weight:500;color:var(--txt);line-height:1.4;display:block;transition:color var(--ease)}
 /* stretch link to cover full row */
 .pr-title::after{content:'';position:absolute;inset:0;z-index:1;}
-.pr-ex{font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.5}
+.pr-ex{
+  font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.5;
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden;
+}
 .pr-date{font-size:12px;color:var(--faint);white-space:nowrap;flex-shrink:0}
 .pr-tags{display:flex;gap:5px;margin-top:7px;flex-wrap:wrap}
 
