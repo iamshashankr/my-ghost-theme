@@ -18,15 +18,16 @@
           <a href="{{#if canonical_url}}{{canonical_url}}{{else}}{{url}}{{/if}}" class="bullet-card-link" aria-label="{{title}}" target="_blank" rel="noopener noreferrer"></a>
           <div class="bullet-card-inner">
             <div class="bullet-card-top">
-              <time class="bullet-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="MMM D, YYYY"}}</time>
+              <span class="bullet-tag">From LinkedIn</span>
+              <span class="bullet-icon" aria-hidden="true">↗</span>
             </div>
             <h2 class="bullet-title">{{title}}</h2>
+            <time class="bullet-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="MMM D, YYYY"}}</time>
             {{#if custom_excerpt}}
               <p class="bullet-excerpt">{{custom_excerpt}}</p>
             {{else}}
               <p class="bullet-excerpt">{{excerpt words="65"}}</p>
             {{/if}}
-            <span class="bullet-arrow">→</span>
           </div>
         </article>
         {{/foreach}}
