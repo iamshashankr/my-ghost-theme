@@ -111,6 +111,21 @@
     initForms();
     setTimeout(initForms, 800);
 
+    /* Copy post link */
+    document.querySelectorAll('.copy-link-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var url = btn.getAttribute('data-url');
+        var icon = btn.querySelector('.cl-icon'), check = btn.querySelector('.cl-check');
+        var reset = function(){ btn.classList.remove('copied'); if(icon) icon.hidden = false; if(check) check.hidden = true; };
+        navigator.clipboard.writeText(url).then(function(){
+          btn.classList.add('copied');
+          if(icon) icon.hidden = true;
+          if(check) check.hidden = false;
+          setTimeout(reset, 1600);
+        }).catch(function(){});
+      });
+    });
+
     /* Active nav */
     var path = window.location.pathname;
     document.querySelectorAll('.site-nav a').forEach(function(a){

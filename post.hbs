@@ -9,11 +9,6 @@
 {{#post}}
 <article class="single-post">
 
-  <div class="post-bar inner">
-    <a href="/writing" class="post-back">← Writing</a>
-    <time class="post-bar-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="Do MMMM YYYY"}}</time>
-  </div>
-
   <div class="post-wrap inner">
 
     <header class="post-hdr">
@@ -21,18 +16,11 @@
       <h1 class="post-title">{{title}}</h1>
       {{#if custom_excerpt}}<p class="post-sub">{{custom_excerpt}}</p>{{/if}}
       <div class="post-byline">
-        <div class="byline-left">
-          {{#primary_author}}
-            {{#if profile_image}}
-              <img class="au-avatar" src="{{img_url profile_image size="xxs"}}" alt="{{name}}" loading="lazy">
-            {{/if}}
-            <span class="au-name">by {{name}}</span>
-          {{/primary_author}}
-        </div>
-        <a class="share-btn" href="https://twitter.com/intent/tweet?text={{encode title}}&url={{url absolute="true"}}" target="_blank" rel="noopener noreferrer">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.736-8.849L1.254 2.25H8.08l4.259 5.632L18.244 2.25z"/></svg>
-          Share
-        </a>
+        <time class="post-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="Do MMMM YYYY"}}</time>
+        <button type="button" class="copy-link-btn" aria-label="Copy link to this post" data-url="{{url absolute="true"}}">
+          <svg class="cl-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <svg class="cl-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" hidden><path d="M20 6 9 17l-5-5"/></svg>
+        </button>
       </div>
     </header>
 
