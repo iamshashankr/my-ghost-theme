@@ -83,16 +83,20 @@
     document.querySelectorAll('[data-members-form="subscribe"]').forEach(handleSubscribeForm);
   }
 
-  /* ── FOOTER: Bengaluru time + weather ── */
-  function updateFooterMeta() {
-    var el = document.getElementById('footerMeta');
-    if(!el) return;
+  /* ── HEADER + FOOTER: Bengaluru time + weather (shared) ── */
+  function liveMetaTargets() {
+    return [document.getElementById('footerMeta'), document.getElementById('hdrMetaText')].filter(Boolean);
+  }
+  function updateLiveMeta() {
+    var targets = liveMetaTargets();
+    if(!targets.length) return;
     var now = new Date();
     var t = now.toLocaleTimeString('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit',hour12:true});
-    el.textContent = t + ' IST';
+    var setText = function(text){ targets.forEach(function(el){ el.textContent = text; }); };
+    setText(t + ' IST');
     fetch('https://api.open-meteo.com/v1/forecast?latitude=12.9716&longitude=77.5946&current_weather=true&temperature_unit=celsius')
       .then(function(r){ return r.json(); })
-      .then(function(d){ if(d&&d.current_weather) el.textContent = t+' IST · '+Math.round(d.current_weather.temperature)+'°C'; })
+      .then(function(d){ if(d&&d.current_weather) setText(t+' IST · '+Math.round(d.current_weather.temperature)+'°C'); })
       .catch(function(){});
   }
 
@@ -147,14 +151,16 @@
       a.setAttribute('rel','noopener noreferrer');
     });
 
-    /* Footer time + weather */
-    updateFooterMeta();
+    /* Header + footer time + weather */
+    updateLiveMeta();
     setInterval(function(){
-      var el = document.getElementById('footerMeta'); if(!el) return;
+      var targets = liveMetaTargets();
+      if(!targets.length) return;
       var now = new Date();
       var t = now.toLocaleTimeString('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit',hour12:true});
-      var cur = el.textContent; var deg = cur.match(/·\s*\d+°C/);
-      el.textContent = deg ? t+' IST '+deg[0] : t+' IST';
+      var cur = targets[0].textContent; var deg = cur.match(/·\s*\d+°C/);
+      var text = deg ? t+' IST '+deg[0] : t+' IST';
+      targets.forEach(function(el){ el.textContent = text; });
     }, 60000);
 
   });
