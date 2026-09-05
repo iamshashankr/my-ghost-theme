@@ -8,7 +8,6 @@
   --card:#f2f2f0;--acc:#7ed957;--acc-d:#5cb836;
   --max-w:600px;--pad:32px;
   --font:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
-  --font-serif:'Fraunces',Georgia,serif;
   --r:8px;--ease:0.18s ease;
   --grad:conic-gradient(from 130deg,#a8f06a,#7ed957 30%,#4dcc20 60%,#8ae846 80%,#a8f06a);
 }
@@ -684,35 +683,22 @@ button{cursor:pointer;border:none;background:none;font:inherit}
 /* BULLETS PAGE */
 .bullets-page { padding-bottom: 80px; }
 
-/* Editorial serif treatment on this page's title only — scoped, doesn't touch other pages */
-.bullets-page .page-title {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 500;
-  letter-spacing: -.01em;
-}
-
 .bullets-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
-  margin-top: 8px;
+  gap: 12px;
+  margin-top: 4px;
 }
 
 .bullet-card {
   background: var(--card);
-  border-radius: 16px;
-  border: 1px solid color-mix(in srgb, var(--txt) 7%, transparent);
+  border-radius: 8px;
   position: relative;
-  transition: transform var(--ease), filter var(--ease), border-color var(--ease);
+  transition: transform var(--ease), background var(--ease);
   overflow: hidden;
 }
 
-.bullet-card:hover {
-  transform: translateY(-3px);
-  filter: brightness(1.06);
-  border-color: color-mix(in srgb, var(--acc) 35%, transparent);
-}
+.bullet-card:hover { transform: translateY(-2px); }
 
 .bullet-card-link {
   position: absolute;
@@ -721,72 +707,34 @@ button{cursor:pointer;border:none;background:none;font:inherit}
 }
 
 .bullet-card-inner {
-  padding: 24px 24px 22px;
+  padding: 20px 22px 22px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
 }
 
-.bullet-card-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-}
+.bullet-card-top { margin-bottom: 2px; }
 
-.bullet-tag {
-  font-size: 10.5px;
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
+.bullet-date {
+  font-size: 11px;
   color: var(--faint);
-}
-
-.bullet-icon {
-  width: 26px;
-  height: 26px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  border: 1px solid color-mix(in srgb, var(--txt) 14%, transparent);
-  color: var(--muted);
-  font-size: 12px;
-  transition: background var(--ease), color var(--ease), border-color var(--ease), transform var(--ease);
-}
-
-.bullet-card:hover .bullet-icon {
-  background: var(--acc);
-  color: #0a0a0a;
-  border-color: transparent;
-  transform: rotate(45deg);
+  font-weight: 500;
 }
 
 .bullet-title {
-  font-family: var(--font-serif);
-  font-size: 19px;
-  font-weight: 600;
-  letter-spacing: -.01em;
-  line-height: 1.3;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -.015em;
+  line-height: 1.35;
   color: var(--txt);
   transition: color var(--ease);
-  margin-bottom: 8px;
 }
 
 .bullet-card:hover .bullet-title { color: var(--acc); }
 
-.bullet-date {
-  display: block;
-  font-size: 12px;
-  color: var(--faint);
-  font-weight: 500;
-  margin-bottom: 10px;
-}
-
 .bullet-excerpt {
-  font-size: 13.5px;
-  line-height: 1.7;
+  font-size: 13px;
+  line-height: 1.65;
   color: var(--muted);
   flex: 1;
   display: -webkit-box;
@@ -801,18 +749,30 @@ button{cursor:pointer;border:none;background:none;font:inherit}
   grid-column: 1 / -1;
 }
 
-.bullet-card:nth-child(3n+1) .bullet-title { font-size: 26px; }
+.bullet-card:nth-child(3n+1) .bullet-title { font-size: 18px; }
 .bullet-card:nth-child(3n+1) .bullet-excerpt {
-  font-size: 14.5px;
+  font-size: 14px;
   -webkit-line-clamp: 3;
   line-clamp: 3;
   max-width: 560px;
+}
+
+.bullet-arrow {
+  font-size: 14px;
+  color: var(--faint);
+  margin-top: 6px;
+  transition: color var(--ease), transform var(--ease);
+  display: inline-block;
+}
+
+.bullet-card:hover .bullet-arrow {
+  color: var(--acc);
+  transform: translateX(3px);
 }
 
 .bullets-empty { padding: 36px 0; font-size: 14px; color: var(--faint); }
 
 @media(max-width: 600px) {
   .bullets-grid { grid-template-columns: 1fr; gap: 10px; }
-  .bullet-card-inner { padding: 20px 20px 20px; }
-  .bullet-card:nth-child(3n+1) .bullet-title { font-size: 21px; }
+  .bullet-card-inner { padding: 16px 18px 18px; }
 }
