@@ -83,9 +83,9 @@
     document.querySelectorAll('[data-members-form="subscribe"]').forEach(handleSubscribeForm);
   }
 
-  /* ── HEADER + FOOTER: Bengaluru time + weather (shared) ── */
+  /* ── HEADER: Bengaluru time + weather ── */
   function liveMetaTargets() {
-    return [document.getElementById('footerMeta'), document.getElementById('hdrMetaText')].filter(Boolean);
+    return [document.getElementById('hdrMetaText')].filter(Boolean);
   }
   function updateLiveMeta() {
     var targets = liveMetaTargets();
@@ -151,7 +151,7 @@
       a.setAttribute('rel','noopener noreferrer');
     });
 
-    /* Header + footer time + weather */
+    /* Header time + weather */
     updateLiveMeta();
     setInterval(function(){
       var targets = liveMetaTargets();
