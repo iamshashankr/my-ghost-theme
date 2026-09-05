@@ -278,6 +278,9 @@ button{cursor:pointer;border:none;background:none;font:inherit}
 .copy-link-btn{display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;color:var(--muted);background:var(--card);border-radius:50%;transition:background var(--ease),color var(--ease)}
 .copy-link-btn:hover{background:var(--acc);color:#0a0a0a}
 .copy-link-btn.copied{background:var(--acc);color:#0a0a0a}
+.copy-link-btn .cl-check{display:none}
+.copy-link-btn.copied .cl-icon{display:none}
+.copy-link-btn.copied .cl-check{display:block}
 .post-img{margin:28px 0;border-radius:var(--r);overflow:hidden}
 .post-img img{width:100%}
 .post-img figcaption{font-size:11.5px;color:var(--faint);text-align:center;padding:9px 0 0;font-style:italic}

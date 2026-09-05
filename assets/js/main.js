@@ -115,13 +115,9 @@
     document.querySelectorAll('.copy-link-btn').forEach(function(btn){
       btn.addEventListener('click', function(){
         var url = btn.getAttribute('data-url');
-        var icon = btn.querySelector('.cl-icon'), check = btn.querySelector('.cl-check');
-        var reset = function(){ btn.classList.remove('copied'); if(icon) icon.hidden = false; if(check) check.hidden = true; };
         navigator.clipboard.writeText(url).then(function(){
           btn.classList.add('copied');
-          if(icon) icon.hidden = true;
-          if(check) check.hidden = false;
-          setTimeout(reset, 1600);
+          setTimeout(function(){ btn.classList.remove('copied'); }, 1600);
         }).catch(function(){});
       });
     });
