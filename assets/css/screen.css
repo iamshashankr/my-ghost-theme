@@ -524,6 +524,12 @@ button{cursor:pointer;border:none;background:none;font:inherit}
   align-self: center;
 }
 .hero-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center 18%; display: block; }
+/* Mascot: owl that watches the cursor (assets/js/mascot.js) */
+.mascot { position: relative; display: block; flex-shrink: 0; width: 128px; height: 128px; padding: 0; border: 0; background: transparent; cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent; }
+.mascot:focus-visible { outline: 2px solid var(--acc); outline-offset: 4px; border-radius: 50%; }
+.mascot-squash { position: relative; display: block; width: 100%; height: 100%; transform-origin: 50% 78%; }
+.mascot-layer { position: absolute; inset: 0; background-size: 300% 300%; background-repeat: no-repeat; }
+.hero-mascot { align-self: center; margin: -16px -10px -16px -18px; }
 .hero-body { flex: 1; min-width: 0; display: flex; align-items: center; }
 .hero-p { font-size: 15px; line-height: 1.75; color: var(--muted); }
 .hero-p a { color: var(--txt); font-weight: 500; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(0,0,0,.15); transition: text-decoration-color var(--ease); }
@@ -669,6 +675,7 @@ button{cursor:pointer;border:none;background:none;font:inherit}
   .hero { padding: 32px 0 36px; flex-direction: row; gap: 16px; align-items: flex-start; }
   .hero-avatar { width: 60px; height: 60px; border-radius: 50%; flex-shrink: 0; align-self: flex-start; }
   .hero-body { align-items: flex-start; }
+  .hero-mascot { width: 84px; height: 84px; align-self: flex-start; margin: -10px -8px 0 -12px; }
 
 
   /* Lists: full width */
