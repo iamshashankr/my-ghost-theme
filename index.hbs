@@ -3,14 +3,11 @@
 <div class="home-page">
   <div class="inner">
 
-    {{!-- ── HERO: centered, updated bio ── --}}
-    <section class="hero">
-      <div class="hero-avatar">
-        <img src="{{asset 'images/avatar-sm.jpg'}}" alt="Shashank R" loading="eager">
-      </div>
-      <div class="hero-body">
-        <p class="hero-p">Hi, I'm Shashank. This is my little corner of the internet where I document thoughts on things I find interesting. I started writing around 18 as a way to make some extra bucks, somewhere along the way, it stopped being a side thing and became the thing. Today, writing is what lets me earn, create, and design my life on my own terms. <a href="/about">More →</a></p>
-      </div>
+    {{!-- ── INTRO: big type with inline toys (icons live in partials/icons) ── --}}
+    <section class="intro">
+      <p class="intro-p">Hi, I’m <span class="kw"><img class="kw-face" src="{{asset 'images/avatar-nav.jpg'}}" alt="" width="48" height="48">Shashank</span>. I grew up in <span class="kw">{{> "icons/top"}}Channapatna</span>, moved to <span class="kw">{{> "icons/tree"}}Bengaluru</span> for engineering, and have been <span class="kw">writing</span> since college. I work across writing and marketing, and outside of that, I keep life slow and simple, with a small circle of friends, easy weekends, and the occasional <span class="kw">{{> "icons/car"}}road trip</span>.</p>
+      <p class="intro-p">This site is where I <span class="kw">{{> "icons/pencil"}}write</span> about what I’m learning and thinking about.</p>
+      <a class="intro-more" href="/about/">More about me <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
     </section>
 
     {{!-- ── START HERE: featured posts only ── --}}

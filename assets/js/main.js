@@ -128,6 +128,7 @@
 
     /* Active nav + sliding highlight */
     initNavPill();
+    initKeywords();
 
 
     /* Open all external links in a new tab */
@@ -158,6 +159,23 @@
     }, 60000);
 
   });
+
+  /* ── INLINE TOYS · tap to play on touch screens ──────────────────────
+     Hover plays the little icon animations on desktop (pure CSS). Phones
+     have no hover, so a tap on a highlighted word plays it for a moment.
+     Taps on links inside a word still follow the link.
+  ─────────────────────────────────────────────────────────────────────── */
+  function initKeywords(){
+    document.querySelectorAll('.kw').forEach(function(k){
+      if(!k.querySelector('.ic, .kw-face')) return;
+      var t;
+      k.addEventListener('click', function(e){
+        if(e.target.closest('a')) return;
+        k.classList.remove('is-play'); void k.offsetWidth; k.classList.add('is-play');
+        clearTimeout(t); t = setTimeout(function(){ k.classList.remove('is-play'); }, 1600);
+      });
+    });
+  }
 
   /* ── MENU BAR · floating pill with sliding highlight ───────────────────
      A soft tab sits behind the current page. On hover (or keyboard focus)

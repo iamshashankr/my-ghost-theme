@@ -4,45 +4,40 @@
 <div class="about-page">
   <div class="inner">
 
+    <h1 class="ab-title">Hi, I’m <img class="kw-face" src="{{asset 'images/avatar-nav.jpg'}}" alt="" width="48" height="48"> Shashank.<span>Thanks for stopping by.</span></h1>
+
+    <p class="ab-lede">I grew up in <span class="kw">{{> "icons/top"}}<a href="https://en.wikipedia.org/wiki/Channapatna">Channapatna</a></span>, a small town near Bengaluru known for its wooden toys, and I was the kind of kid who was happy spending time on his own. After school I went into engineering, mostly because that’s what most of us were expected to do, and in my second year I moved to <span class="kw">Bengaluru</span>. I’ve lived here ever since.</p>
+
+  </div>
+
+  <figure class="ab-photo">
     {{#if feature_image}}
-    <div class="about-photo">
-      <img src="{{img_url feature_image size="l"}}" alt="Shashank R" loading="eager">
-    </div>
+    <img src="{{img_url feature_image size="l"}}"
+         srcset="{{img_url feature_image size="m"}} 600w, {{img_url feature_image size="l"}} 1000w, {{img_url feature_image size="xl"}} 2000w"
+         sizes="(max-width: 824px) calc(100vw - 36px), 760px"
+         alt="Shashank R" width="1000" height="667" fetchpriority="high" decoding="async">
     {{else}}
-    <div class="about-photo">
-      <img src="{{asset 'images/avatar.jpg'}}" alt="Shashank R" loading="eager">
-    </div>
+    <img src="{{asset 'images/avatar.jpg'}}" alt="Shashank R" width="1080" height="1440" fetchpriority="high" decoding="async">
     {{/if}}
+  </figure>
+
+  <div class="inner">
 
     <div class="about-body">
 
-      <p>Hi. Thanks for being here. I'm Shashank, a digital writer working at the intersection of writing, marketing, and how people show up online. This is my space on the internet where I think, document what I'm learning, and try to make sense of things as I go.</p>
+      <p>It was during those college years that I first got curious about writing. I started reading more and signed up for a couple of online copywriting courses without any real idea of where it would lead. By the end of 2019, someone paid me to write for the first time, and I kept going from there.</p>
 
-      <h3>Work</h3>
+      <p>Marketing came into the picture soon after as an extension of writing, and I ended up enjoying it just as much. I worked across content and marketing roles and spent close to two years at <a href="https://www.thetesttribe.com/">The Test Tribe</a>, working on communities and events. Today I’m at <a href="https://www.growedin.com/">GrowedIn</a>, where I help executives and companies build their presence on LinkedIn in their own voice, which is the kind of work I had always wanted to do.</p>
 
-      <p>I didn't start here with a clear plan. I moved to Bangalore after school, studied engineering, and somewhere along the way realised I wasn't building towards something I actually wanted. Writing started as a side thing, a way to make some money, but it slowly became the one thing that kept pulling me back.</p>
+      <p>Outside work, my life moves at a slower pace. I prefer a small circle over big crowds, and most of my weekends go into a movie, a show, or a long conversation with friends. Every now and then, it’s an <span class="kw">{{> "icons/ticket"}}arcade</span> or a game.</p>
 
-      <p>The early years were a mix of trying things, switching directions, and figuring out what fit. I worked across content and marketing roles, spent close to two years at <a href="https://www.thetesttribe.com/" target="_blank" rel="noopener noreferrer">The Test Tribe</a> understanding communities and events, and kept writing consistently through all of it.</p>
+      <p>This year, some of those weekends turned into trips. I went to <span class="kw">{{> "icons/boulders"}}<a href="https://en.wikipedia.org/wiki/Hampi">Hampi</a></span> with my cousins, and to <span class="kw">{{> "icons/waves"}}<a href="https://en.wikipedia.org/wiki/Kannur">Kannur</a></span> in Kerala and <span class="kw">{{> "icons/train"}}<a href="https://en.wikipedia.org/wiki/Ooty">Ooty</a></span> with my friends. I also took <span class="kw">{{> "icons/plane"}}<a href="/my-first-flight-blr-amd/">my first flight</a></span> this year, something I had wanted to do since I was a kid watching planes at night.</p>
 
-      <p>Today, I work at <a href="https://www.growedin.com/" target="_blank" rel="noopener noreferrer">GrowedIn</a>, where I help executives and companies build their reputation and presence on LinkedIn. A big part of my work is helping people say what they actually mean, in a way that others can understand and trust.</p>
+      <p>As for this site, it’s where I write for myself. I’m still a student when it comes to writing, and most of what I share here is me trying to understand something better, without any fixed schedule or pressure to be consistent.</p>
 
-      <h3>Life</h3>
+      <p>It took me longer than it should have to start this. I kept putting it off, thinking it needed more time, more planning. <a href="https://keyurkumbhare.com/">Keyur</a> kept pushing me for long enough that eventually I just started. Thanks to him. To my surprise, this site came together faster than I expected. Built using <a href="https://claude.ai/">Claude</a>, with <a href="https://ghost.org/">Ghost</a> and <a href="https://www.magicpages.co/">Magic Pages</a> handling the backend. Kept it simple, and close to how I wanted it to feel. This version went live on 19th April 2026. I’ll keep tweaking things as I go.</p>
 
-      <p>Outside of work, things are simple. I prefer a small circle over big crowds. I like spending time with people who feel easy to be around. Most weekends are slow, usually watching movies or shows, sometimes reading, sometimes just switching off.</p>
-
-      <p>I enjoy things that don't ask for too much but still feel fun. Arcades, games, long conversations, that kind of time.</p>
-
-      <h3>This Space</h3>
-
-      <p>The idea didn't start as a website. It started with a simple thought: I wanted a place to put things. Somewhere that felt like my own.</p>
-
-      <p>I'm still a student when it comes to writing. Most of what I share is me trying to understand something better. This is where I keep that, without any fixed schedule, or pressure to be consistent.</p>
-
-      <p>It took me longer than it should have to start this. I kept putting it off, thinking it needed more time, more planning. <a href="https://keyurkumbhare.com/" target="_blank" rel="noopener noreferrer">Keyur</a> kept pushing me for long enough that eventually I just started. Thanks to him. To my surprise this site came together faster than I expected. Built using <a href="https://claude.ai/" target="_blank" rel="noopener noreferrer">Claude</a>, with <a href="https://ghost.org/" target="_blank" rel="noopener noreferrer">Ghost</a> and <a href="https://www.magicpages.co/" target="_blank" rel="noopener noreferrer">Magic Pages</a> handling the backend. Kept it simple, and close to how I wanted it to feel. This version went live on 19th April 2026. I'll keep tweaking things as I go.</p>
-
-      <p>This is my little corner on the internet.</p>
-
-      <p>You're always welcome here.</p>
+      <p class="ab-close">Thanks for reading this far. You’re always welcome here.</p>
 
     </div>
 
