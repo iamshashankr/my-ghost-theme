@@ -126,14 +126,8 @@
       });
     });
 
-    /* Active nav */
-    var path = window.location.pathname;
-    document.querySelectorAll('.site-nav a').forEach(function(a){
-      var href = a.getAttribute('href'); if(!href) return;
-      var li = a.closest('li'); if(!li) return;
-      if(href==='/'&&path==='/') li.classList.add('current');
-      else if(href!=='/'&&path.startsWith(href)) li.classList.add('current');
-    });
+    /* Active nav + sliding highlight */
+    initNavPill();
 
 
     /* Open all external links in a new tab */
@@ -164,6 +158,65 @@
     }, 60000);
 
   });
+
+  /* ── MENU BAR · floating pill with sliding highlight ───────────────────
+     A soft tab sits behind the current page. On hover (or keyboard focus)
+     it glides to the hovered item, then returns when the pointer leaves.
+     The header gets .is-scrolled once the page moves, which hides the
+     time/weather and gives the theme button its own small pill.
+  ─────────────────────────────────────────────────────────────────────── */
+  function initNavPill(){
+    var pill = document.querySelector('[data-nav-pill]');
+    var header = document.getElementById('siteHeader');
+    if(header){
+      var ticking = false;
+      var onScroll = function(){
+        if(ticking) return; ticking = true;
+        requestAnimationFrame(function(){ header.classList.toggle('is-scrolled', window.scrollY > 24); ticking = false; });
+      };
+      window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+    }
+    if(!pill) return;
+    var chip = pill.querySelector('.nav-chip');
+    var home = pill.querySelector('.nav-home');
+    var links = [].slice.call(pill.querySelectorAll('.nav a'));
+    var items = (home ? [home] : []).concat(links);
+    var norm = function(p){ return (p || '/').replace(/\/+$/, '') || '/'; };
+    var path = norm(window.location.pathname);
+
+    /* Current page: Ghost's own marker first, then a path match (posts → none) */
+    var current = home && home.classList.contains('is-current') ? home : null;
+    links.forEach(function(a){
+      var li = a.closest('li'); var p;
+      try{ p = norm(new URL(a.href, window.location.href).pathname); }catch(e){ return; }
+      var hit = (li && li.classList.contains('nav-current')) || (p !== '/' && (path === p || path.indexOf(p + '/') === 0));
+      if(hit && !current){ current = a; if(li) li.classList.add('nav-current'); a.setAttribute('aria-current','page'); }
+    });
+    if(!current && home && path === '/'){ current = home; home.classList.add('is-current'); }
+
+    pill.classList.add('js-chip');
+    function lit(el){ items.forEach(function(i){ i.classList.toggle('is-lit', i === el); }); }
+    function place(el, instant){
+      if(!chip) return;
+      if(!el){ chip.style.opacity = '0'; lit(null); return; }
+      if(instant) chip.classList.add('no-anim');
+      chip.style.width = el.offsetWidth + 'px';
+      chip.style.transform = 'translateX(' + el.offsetLeft + 'px)';
+      chip.style.opacity = '1';
+      lit(el);
+      if(instant){ void chip.offsetWidth; chip.classList.remove('no-anim'); }
+    }
+    var canHover = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+    items.forEach(function(el){
+      if(canHover) el.addEventListener('mouseenter', function(){ place(el); });
+      el.addEventListener('focus', function(){ place(el); });
+    });
+    if(canHover) pill.addEventListener('mouseleave', function(){ place(current); });
+    pill.addEventListener('focusout', function(e){ if(!pill.contains(e.relatedTarget)) place(current); });
+    place(current, true);
+    if(document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ place(current, true); });
+    var t; window.addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(function(){ place(current, true); }, 120); });
+  }
 
   /* ── NOW · fanned card deck ────────────────────────────────────────────
      Hover (mouse) fans the cards; touch screens keep them gently fanned.

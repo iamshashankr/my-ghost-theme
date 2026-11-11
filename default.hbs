@@ -20,17 +20,15 @@
 <body class="{{body_class}}">
 <div class="site-wrapper">
 
-    <header class="site-header">
+    <header class="site-header" id="siteHeader">
         <div class="hdr-inner">
-            <div class="hdr-left">
-                <a href="{{@site.url}}" class="nav-logo" title="Home">
-                    <span class="logo-bg" aria-hidden="true"></span>
-                    <span class="logo-img" aria-hidden="true">
-                        <img src="{{asset 'images/avatar-sm.jpg'}}" alt="Shashank R" loading="lazy">
-                    </span>
+            <nav class="hdr-pill" aria-label="Main navigation" data-nav-pill>
+                <span class="nav-chip" aria-hidden="true"></span>
+                <a href="{{@site.url}}" class="nav-home{{#is "home"}} is-current{{/is}}" aria-label="Shashank R, home"{{#is "home"}} aria-current="page"{{/is}}>
+                    <img src="{{asset 'images/avatar-nav.jpg'}}" alt="" width="48" height="48">
                 </a>
-                <nav class="site-nav" aria-label="Main navigation">{{navigation}}</nav>
-            </div>
+                {{navigation}}
+            </nav>
             <div class="hdr-right">
                 <span class="hdr-meta" id="hdrMeta">
                     <span class="hdr-meta-label">Bengaluru ·</span>
