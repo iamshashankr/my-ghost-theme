@@ -129,6 +129,7 @@
     /* Active nav + sliding highlight */
     initNavPill();
     initKeywords();
+    initTimeline();
 
 
     /* Open all external links in a new tab */
@@ -159,6 +160,24 @@
     }, 60000);
 
   });
+
+  /* ── WRITING TIMELINE · group recent posts by month ────────────────────
+     Ghost lists posts flat; consecutive posts from the same month hide
+     their repeated month label, and each month gets the next toy colour.
+     Without JS every post simply shows its own month.
+  ─────────────────────────────────────────────────────────────────────── */
+  function initTimeline(){
+    var colors = ['#E3AE3C', '#C8402F', '#3F8A5C', '#2E5C9E'];
+    document.querySelectorAll('[data-timeline]').forEach(function(tl){
+      var prev = null, n = -1;
+      tl.querySelectorAll('.tl-item').forEach(function(it){
+        var m = it.getAttribute('data-month');
+        if(m === prev){ it.classList.add('is-cont'); }
+        else { n++; it.style.setProperty('--dot', colors[n % colors.length]); }
+        prev = m;
+      });
+    });
+  }
 
   /* ── INLINE TOYS · tap to play on touch screens ──────────────────────
      Hover plays the little icon animations on desktop (pure CSS). Phones

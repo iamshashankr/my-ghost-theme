@@ -9,7 +9,7 @@
 
 :root,[data-theme="light"]{
   --bg:#fff;--bg2:#f8f8f6;--txt:#111;--muted:#666;--faint:#aaa;
-  --card:#f2f2f0;--acc:#7ed957;--acc-d:#5cb836;--soft:#8f8f8a;
+  --card:#f2f2f0;--acc:#7ed957;--acc-d:#5cb836;--soft:#8f8f8a;--paper:#fffdf6;--paper-edge:rgba(120,100,60,.12);--paper-line:#d6cebd;--paper-ink:#6a655b;--paper-meta:#9a9384;--tl-line:#ecece8;
   --max-w:600px;--pad:32px;
   --font:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
   --r:8px;--ease:0.18s ease;
@@ -17,8 +17,8 @@
   --glass-bg:rgba(255,255,255,.65);--glass-border:rgba(0,0,0,.06);--glass-shadow:rgba(0,0,0,.06);
   --pill:#fff;--pill-line:rgba(0,0,0,.08);--pill-shadow:0 1px 2px rgba(0,0,0,.04),0 6px 18px rgba(0,0,0,.06);--chip:#efefed;
 }
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d0d0d;--bg2:#151515;--txt:#efefef;--muted:#888;--faint:#444;--card:#1a1a1a;--soft:#77776f;--glass-bg:rgba(26,26,26,.55);--glass-border:rgba(255,255,255,.08);--glass-shadow:rgba(0,0,0,.3);--pill:#161616;--pill-line:rgba(255,255,255,.08);--pill-shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.35);--chip:#2a2a2a}}
-[data-theme="dark"]{--bg:#0d0d0d;--bg2:#151515;--txt:#efefef;--muted:#888;--faint:#444;--card:#1a1a1a;--soft:#77776f;--glass-bg:rgba(26,26,26,.55);--glass-border:rgba(255,255,255,.08);--glass-shadow:rgba(0,0,0,.3);--pill:#161616;--pill-line:rgba(255,255,255,.08);--pill-shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.35);--chip:#2a2a2a}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d0d0d;--bg2:#151515;--txt:#efefef;--muted:#888;--faint:#444;--card:#1a1a1a;--soft:#77776f;--paper:#1d1b17;--paper-edge:rgba(255,255,255,.06);--paper-line:#4a453b;--paper-ink:#aba597;--paper-meta:#7f796d;--tl-line:#262626;--glass-bg:rgba(26,26,26,.55);--glass-border:rgba(255,255,255,.08);--glass-shadow:rgba(0,0,0,.3);--pill:#161616;--pill-line:rgba(255,255,255,.08);--pill-shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.35);--chip:#2a2a2a}}
+[data-theme="dark"]{--bg:#0d0d0d;--bg2:#151515;--txt:#efefef;--muted:#888;--faint:#444;--card:#1a1a1a;--soft:#77776f;--paper:#1d1b17;--paper-edge:rgba(255,255,255,.06);--paper-line:#4a453b;--paper-ink:#aba597;--paper-meta:#7f796d;--tl-line:#262626;--glass-bg:rgba(26,26,26,.55);--glass-border:rgba(255,255,255,.08);--glass-shadow:rgba(0,0,0,.3);--pill:#161616;--pill-line:rgba(255,255,255,.08);--pill-shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.35);--chip:#2a2a2a}
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:15px;scroll-behavior:smooth}
@@ -839,3 +839,63 @@ button{cursor:pointer;border:none;background:none;font:inherit}
 @media(prefers-reduced-motion:reduce){
   .kw .ic,.kw .kw-face{animation:none!important;transition:none}
 }
+
+/* ════════════════════════════════
+   WRITING · Start here as pinned notes, Recent as a month timeline
+   Month grouping + dot colours: initTimeline() in main.js
+   ════════════════════════════════ */
+.notes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding-top:10px}
+.note{position:relative;display:block;padding:24px 20px 18px;border-radius:4px;background:var(--paper);border:1px solid var(--paper-edge);color:var(--txt);box-shadow:0 1px 2px rgba(0,0,0,.04),0 12px 24px -16px rgba(0,0,0,.22);transform:rotate(-1.4deg);transition:transform .5s cubic-bezier(.3,1.4,.5,1),box-shadow .35s ease}
+.note:nth-child(2n){transform:rotate(1.2deg)}
+.note:hover,.note:focus-visible{transform:rotate(0) translateY(-4px);box-shadow:0 2px 4px rgba(0,0,0,.04),0 22px 36px -18px rgba(0,0,0,.28)}
+.note:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+.note-pin{position:absolute;top:-7px;left:50%;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:#C8402F;box-shadow:inset -2px -3px 0 rgba(0,0,0,.18),inset 2px 2px 0 rgba(255,255,255,.35),0 3px 4px rgba(0,0,0,.2)}
+.note:nth-child(4n+2) .note-pin{background:#2E5C9E}
+.note:nth-child(4n+3) .note-pin{background:#E3AE3C}
+.note:nth-child(4n+4) .note-pin{background:#3F8A5C}
+.note-title{display:block;font-size:16px;font-weight:600;line-height:1.35;letter-spacing:-.012em}
+.note-ex{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;line-clamp:3;overflow:hidden;margin-top:10px;font-size:13px;line-height:1.6;color:var(--paper-ink)}
+.note-meta{display:block;margin-top:14px;font-size:12px;color:var(--paper-meta)}
+
+.tl{position:relative;list-style:none;margin:0;padding:4px 0 0 26px}
+.tl::before{content:'';position:absolute;left:4px;top:12px;bottom:12px;width:1px;background:var(--tl-line)}
+.tl-item{position:relative;padding-top:18px}
+.tl-item:first-child,.tl-item.is-cont{padding-top:0}
+.tl-item.is-cont .tl-month{display:none}
+.tl-month{position:relative;margin:0 0 4px;font-size:12px;font-weight:600;color:var(--soft)}
+.tl-month::before{content:'';position:absolute;left:-26px;top:4px;width:9px;height:9px;border-radius:50%;background:var(--dot,#E3AE3C);box-shadow:0 0 0 3px var(--bg)}
+.tl-post{display:block;padding:7px 0;color:var(--txt)}
+.tl-row{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.tl-title{display:block;font-size:16px;font-weight:600;line-height:1.4;letter-spacing:-.01em;transition:transform .25s ease}
+.tl-post:hover .tl-title{transform:translateX(3px)}
+.tl-read{flex-shrink:0;font-size:12px;color:var(--soft);white-space:nowrap}
+.tl-ex{display:block;margin-top:4px;font-size:13px;line-height:1.55;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ── SUBSCRIBE · homepage card (Writing page keeps its own style) ── */
+.home-nl{margin-top:64px;padding:24px;border-radius:18px;background:var(--bg2)}
+.home-nl .nl-head{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.home-nl .nl-env{display:block;flex-shrink:0}
+.home-nl .writing-nl-title{margin:0;font-size:18px;font-weight:600;letter-spacing:-.012em}
+.home-nl .writing-nl-desc{margin:0 0 18px;max-width:none;font-size:14px;line-height:1.6}
+.home-nl .sub-row{gap:4px;margin-bottom:10px;padding:4px;flex-wrap:nowrap;background:var(--bg);border:1px solid var(--pill-line);border-radius:12px;transition:border-color var(--ease)}
+.home-nl .sub-row:focus-within{border-color:var(--acc)}
+.home-nl .sub-input{flex:1 1 auto;height:42px;padding:0 12px;border:0;border-radius:9px;background:transparent;font-size:14px}
+.home-nl .sub-btn{width:auto;height:42px;padding:0 20px;border-radius:9px;font-size:14px}
+.home-nl .sub-meta{margin:0 0 0 2px;font-size:11.5px;line-height:1.4;color:var(--soft)}
+.home-nl .sub-success,.home-nl .member-note{background:var(--bg);border-radius:12px}
+
+@media(max-width:600px){
+  .notes{grid-template-columns:minmax(0,1fr);gap:22px;padding:10px 6px 0}
+  .tl{padding-left:24px}
+  .tl-month::before{left:-24px}
+  .tl-title{font-size:15.5px}
+  .tl-ex{display:none}
+  .home-nl{margin-top:52px;padding:20px}
+  .home-nl .writing-nl-title{font-size:17px}
+  .home-nl .writing-nl-desc{font-size:13.5px}
+  .home-nl .sub-row{flex-wrap:nowrap}
+  .home-nl .sub-input{flex:1 1 auto}
+  .home-nl .sub-btn{width:auto;padding:0 16px}
+}
+@media(prefers-reduced-motion:reduce){.note,.tl-title{transition:none}}
+

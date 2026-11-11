@@ -10,44 +10,43 @@
       <a class="intro-more" href="/about/">More about me <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
     </section>
 
-    {{!-- ── START HERE: featured posts only ── --}}
-    {{#get "posts" filter="featured:true+tag:-list+tag:-bullet" limit="5" order="published_at desc"}}
+    {{!-- ── START HERE: featured posts as pinned notes ── --}}
+    {{#get "posts" filter="featured:true+tag:-list+tag:-bullet" limit="4" order="published_at desc"}}
       {{#if posts}}
       <section class="home-section">
         <div class="section-top"><span class="sl">Start Here</span></div>
-        <ul class="post-list">
+        <div class="notes">
           {{#foreach posts}}
-          <li class="post-row">
-            <div class="pr-left">
-              <a href="{{url}}" class="pr-title">{{title}}</a>
-              <p class="pr-ex">{{excerpt words="48"}}</p>
-            </div>
-            <time class="pr-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="MMM YYYY"}}</time>
-          </li>
+          <a class="note" href="{{url}}">
+            <span class="note-pin" aria-hidden="true"></span>
+            <span class="note-title">{{title}}</span>
+            <span class="note-ex">{{excerpt}}</span>
+            <span class="note-meta"><time datetime="{{date format='YYYY-MM-DD'}}">{{date format="MMM YYYY"}}</time> · {{reading_time minute="1 min" minutes="% min"}}</span>
+          </a>
           {{/foreach}}
-        </ul>
+        </div>
       </section>
       {{/if}}
     {{/get}}
 
-    {{!-- ── RECENT WRITING: exclude list-tagged and bullet-tagged posts ── --}}
+    {{!-- ── RECENT WRITING: timeline grouped by month (grouping in initTimeline, main.js) ── --}}
     {{#get "posts" filter="tag:-list+tag:-bullet+featured:false" limit="6" order="published_at desc"}}
     <section class="home-section">
       <div class="section-top">
         <span class="sl">Recent Writing</span>
         <a href="/writing" class="sa">All posts →</a>
       </div>
-      <ul class="post-list">
+      <ol class="tl" data-timeline>
         {{#foreach posts}}
-        <li class="post-row">
-          <div class="pr-left">
-            <a href="{{url}}" class="pr-title">{{title}}</a>
-            <p class="pr-ex">{{excerpt words="48"}}</p>
-          </div>
-          <time class="pr-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="MMM YYYY"}}</time>
+        <li class="tl-item" data-month="{{date format='MMMM YYYY'}}">
+          <p class="tl-month">{{date format="MMMM YYYY"}}</p>
+          <a class="tl-post" href="{{url}}">
+            <span class="tl-row"><span class="tl-title">{{title}}</span><span class="tl-read">{{reading_time minute="1 min" minutes="% min"}}</span></span>
+            <span class="tl-ex">{{excerpt}}</span>
+          </a>
         </li>
         {{/foreach}}
-      </ul>
+      </ol>
     </section>
     {{/get}}
 
@@ -59,14 +58,17 @@
       {{> "now-deck"}}
     </section>
 
-    {{!-- ── SUBSCRIBE: same layout as Writing page ── --}}
+    {{!-- ── SUBSCRIBE: card (styles scoped to .home-nl) ── --}}
     <section class="home-nl">
-      <h3 class="writing-nl-title">Stay in the loop</h3>
+      <div class="nl-head">
+        <svg class="nl-env" width="32" height="24" viewBox="0 0 30 22" aria-hidden="true"><rect x="1" y="1" width="28" height="20" rx="3" fill="var(--paper)" stroke="var(--paper-line)"/><path d="M2.5 3l12.5 8.5L27.5 3" fill="none" stroke="var(--paper-line)" stroke-width="1.4"/><rect x="20.5" y="4" width="5.5" height="6.5" rx="1" fill="#C8402F"/></svg>
+        <h3 class="writing-nl-title">Stay in the loop</h3>
+      </div>
       <p class="writing-nl-desc">Receive new essays sent directly to your inbox when published.</p>
       {{#unless @member}}
       <form class="sub-form" data-members-form="subscribe" novalidate>
         <div class="sub-row">
-          <input class="sub-input" type="email" name="email" placeholder="your@email.com" required autocomplete="email">
+          <input class="sub-input" type="email" name="email" placeholder="your@email.com" aria-label="Email address" required autocomplete="email">
           <button class="sub-btn" type="submit">
             <span class="sub-label">Subscribe</span>
             <span class="sub-loading" hidden>…</span>
