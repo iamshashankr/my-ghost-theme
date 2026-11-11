@@ -164,4 +164,74 @@
     }, 60000);
 
   });
+
+  /* ── NOW · fanned card deck ────────────────────────────────────────────
+     Hover (mouse) fans the cards; touch screens keep them gently fanned.
+     Click/tap a back card to bring it forward; tap the front card to open
+     its link. Swipe, arrow buttons and ←/→ keys cycle the deck.
+  ─────────────────────────────────────────────────────────────────────── */
+  function initNowDeck(root){
+    if(root._ndWired) return; root._ndWired = true;
+    var stage = root.querySelector('.nd-stage');
+    var cards = [].slice.call(root.querySelectorAll('.nd-card'));
+    var items = [].slice.call(root.querySelectorAll('.nd-item'));
+    var dots  = [].slice.call(root.querySelectorAll('.nd-dot'));
+    if(!stage || cards.length < 2) return;
+    var n = cards.length, order = cards.map(function(_, i){ return i; });
+    var canHover = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+    var fanned = !canHover, startX = null, swiped = false;
+
+    function layout(){
+      var w = stage.clientWidth, cw = cards[0].offsetWidth;
+      var spread = Math.max(40, Math.min(cw * 0.92, (w - cw) / 2 - 6));
+      var stack = [[0,0,0,1],[18,-10,5,.95],[34,-18,9,.9]];
+      var fan   = [[0,-8,0,1.03],[spread,14,10,.9],[-spread,14,-10,.9]];
+      if(!canHover) fan = [[0,0,0,1],[spread*.62,18,9,.86],[-spread*.62,18,-9,.86]];
+      cards.forEach(function(card, i){
+        var rank = order.indexOf(i), p = (fanned ? fan : stack)[Math.min(rank, 2)];
+        card.style.transform = 'translate('+p[0]+'px,'+p[1]+'px) rotate('+p[2]+'deg) scale('+p[3]+')';
+        card.style.zIndex = n - rank;
+        card.classList.toggle('is-front', rank === 0);
+        card.setAttribute('tabindex', rank === 0 ? '0' : '-1');
+      });
+      var front = order[0];
+      items.forEach(function(el, i){ el.classList.toggle('is-on', i === front); el.setAttribute('aria-hidden', i === front ? 'false' : 'true'); });
+      dots.forEach(function(el, i){ el.classList.toggle('is-on', i === front); });
+    }
+    function bring(i){ order = [i].concat(order.filter(function(x){ return x !== i; })); layout(); }
+    function step(dir){
+      order = dir > 0 ? order.slice(1).concat(order[0]) : [order[n-1]].concat(order.slice(0, n-1));
+      layout();
+    }
+
+    cards.forEach(function(card, i){
+      card.addEventListener('click', function(e){
+        if(swiped){ e.preventDefault(); swiped = false; return; }
+        if(order[0] !== i){ e.preventDefault(); bring(i); }
+      });
+    });
+    root.querySelectorAll('.nd-btn').forEach(function(b){
+      b.addEventListener('click', function(){ step(+b.getAttribute('data-dir')); });
+    });
+    stage.addEventListener('keydown', function(e){
+      if(e.key === 'ArrowRight'){ e.preventDefault(); step(1); }
+      else if(e.key === 'ArrowLeft'){ e.preventDefault(); step(-1); }
+    });
+    if(canHover){
+      stage.addEventListener('mouseenter', function(){ fanned = true; layout(); });
+      stage.addEventListener('mouseleave', function(){ fanned = false; layout(); });
+    }
+    stage.addEventListener('pointerdown', function(e){ startX = e.clientX; swiped = false; });
+    stage.addEventListener('pointerup', function(e){
+      if(startX === null) return;
+      var dx = e.clientX - startX; startX = null;
+      if(Math.abs(dx) > 40){ swiped = true; step(dx < 0 ? 1 : -1); }
+    });
+    stage.addEventListener('pointercancel', function(){ startX = null; });
+    var t; window.addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(layout, 120); });
+    layout();
+  }
+  function initNowDecks(){ document.querySelectorAll('[data-now-deck]').forEach(initNowDeck); }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initNowDecks);
+  else initNowDecks();
 })();

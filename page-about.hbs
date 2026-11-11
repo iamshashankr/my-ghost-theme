@@ -46,57 +46,10 @@
 
     </div>
 
-    {{!-- ── NOW (same layout as homepage) ── --}}
-    {{!-- ✏️ EDIT: Update labels, titles, metas to match current status --}}
+    {{!-- ── NOW (same deck as homepage — edit in partials/now-deck.hbs) ── --}}
     <section class="about-now">
       <p class="sect-label">Now</p>
-      <div class="now-grid">
-
-        <a href="https://austinkleon.com/keepgoing/" class="now-card">
-          <div class="now-cover">
-            <img src="{{asset 'images/now-reading.jpg'}}" alt="Keep Going" loading="lazy">
-          </div>
-          <div class="now-info">
-            <span class="now-label">Reading</span>
-            <span class="now-title">Keep Going</span>
-            <span class="now-meta">by Austin Kleon</span>
-          </div>
-        </a>
-
-        <a href="https://www.imdb.com/title/tt32159809/" class="now-card">
-          <div class="now-cover">
-            <img src="{{asset 'images/now-watching.jpg'}}" alt="The Paper" loading="lazy">
-          </div>
-          <div class="now-info">
-            <span class="now-label">Watching</span>
-            <span class="now-title">The Paper</span>
-            <span class="now-meta">A struggling paper, and the publisher trying to revive it.</span>
-          </div>
-        </a>
-
-        <a href="https://podcasts.apple.com/us/podcast/criminal/id809264944" class="now-card">
-          <div class="now-cover">
-            <img src="{{asset 'images/now-listening.jpg'}}" alt="Criminal" loading="lazy">
-          </div>
-          <div class="now-info">
-            <span class="now-label">Listening To</span>
-            <span class="now-title">Criminal</span>
-            <span class="now-meta">Interesting crime stories, hosted by Phoebe Judge.</span>
-          </div>
-        </a>
-
-        <a href="https://www.growedin.com/" target="_blank" rel="noopener noreferrer" class="now-card">
-          <div class="now-cover">
-            <img src="{{asset 'images/now-working.jpg'}}" alt="GrowedIn" loading="lazy">
-          </div>
-          <div class="now-info">
-            <span class="now-label">Working At</span>
-            <span class="now-title">GrowedIn</span>
-            <span class="now-meta">A LinkedIn-only company for executives and enterprises</span>
-          </div>
-        </a>
-
-      </div>
+      {{> "now-deck"}}
     </section>
 
     <div class="sect-divider"></div>

@@ -1,0 +1,55 @@
+{{!--
+  NOW · fanned card deck (used on home + about)
+  ✏️ To update: change the three cards below. For each, keep the image,
+  link and the matching text block in .nd-info in the same order.
+  Images live in assets/images/ at 600×900 (2:3).
+--}}
+<div class="nd" data-now-deck>
+  <div class="nd-stage" tabindex="0" role="group" aria-roledescription="carousel" aria-label="What I'm into right now. Use the arrow keys to browse.">
+
+    <a class="nd-card" href="https://www.goodreads.com/book/show/6900.Tuesdays_with_Morrie" draggable="false" aria-label="Reading: Tuesdays with Morrie">
+      <img src="{{asset 'images/now-reading.jpg'}}" alt="" width="600" height="900" loading="lazy" decoding="async" draggable="false">
+      <span class="nd-gloss" aria-hidden="true"></span>
+    </a>
+
+    <a class="nd-card" href="https://www.imdb.com/title/tt10986410/" draggable="false" aria-label="Watching: Ted Lasso">
+      <img src="{{asset 'images/now-watching.jpg'}}" alt="" width="600" height="900" loading="lazy" decoding="async" draggable="false">
+      <span class="nd-gloss" aria-hidden="true"></span>
+    </a>
+
+    <a class="nd-card" href="https://www.growedin.com/" draggable="false" aria-label="Cookin’ at: GrowedIn">
+      <img src="{{asset 'images/now-working.jpg'}}" alt="" width="600" height="900" loading="lazy" decoding="async" draggable="false">
+      <span class="nd-gloss" aria-hidden="true"></span>
+    </a>
+
+  </div>
+
+  <div class="nd-nav">
+    <button type="button" class="nd-btn" data-dir="-1" aria-label="Previous">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg>
+    </button>
+    <div class="nd-dots" aria-hidden="true"><span class="nd-dot is-on"></span><span class="nd-dot"></span><span class="nd-dot"></span></div>
+    <button type="button" class="nd-btn" data-dir="1" aria-label="Next">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+    </button>
+  </div>
+
+  <div class="nd-info" aria-live="polite">
+    <div class="nd-item is-on">
+      <span class="nd-label">Reading</span>
+      <a class="nd-title" href="https://www.goodreads.com/book/show/6900.Tuesdays_with_Morrie">Tuesdays with Morrie</a>
+      <p class="nd-meta">by Mitch Albom</p>
+    </div>
+    <div class="nd-item">
+      <span class="nd-label">Watching</span>
+      <a class="nd-title" href="https://www.imdb.com/title/tt10986410/">Ted Lasso</a>
+      <p class="nd-meta">An American football coach is hired to manage a British soccer team; what he lacks in knowledge, he makes up for in optimism, determination and biscuits.</p>
+    </div>
+    <div class="nd-item">
+      <span class="nd-label">Cookin’ at</span>
+      <a class="nd-title" href="https://www.growedin.com/">GrowedIn</a>
+      <p class="nd-meta">A LinkedIn marketing partner helping executives and enterprises execute LinkedIn strategies for visibility, relationships, and impact.</p>
+    </div>
+  </div>
+
+</div>
