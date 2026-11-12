@@ -9,20 +9,30 @@
       <p class="page-desc">Essays and observations on the things I find interesting to talk about.</p>
     </header>
 
-    {{!-- Filter OUT posts tagged 'list' and 'bullet' so they only appear on their own pages --}}
+    {{!-- Latest essay up front, then every other essay as a card.
+          Posts tagged 'list' and 'bullet' stay on their own pages. --}}
     {{#get "posts" filter="tag:-list+tag:-bullet" limit="all" order="published_at desc"}}
       {{#if posts}}
-      <ul class="post-list">
+      <div class="wf">
         {{#foreach posts}}
-        <li class="post-row">
-          <div class="pr-left">
-            <a href="{{url}}" class="pr-title">{{title}}</a>
-            <p class="pr-ex">{{excerpt words="48"}}</p>
-          </div>
-          <time class="pr-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="MMM YYYY"}}</time>
-        </li>
+        {{#if @first}}
+        <p class="wf-label">Latest</p>
+        <a class="wf-feat" href="{{url}}">
+          <span class="wf-new" data-new-since="{{date format='YYYY-MM-DD'}}"><i aria-hidden="true"></i><span class="wf-new-l">New · </span><time datetime="{{date format='YYYY-MM-DD'}}">{{date format="MMM YYYY"}}</time></span>
+          <h2 class="wf-feat-title">{{title}}</h2>
+          <p class="wf-feat-ex">{{excerpt words="40"}}</p>
+          <span class="wf-read">Read the essay <b aria-hidden="true">→</b></span>
+        </a>
+        {{#if @last}}{{else}}<p class="wf-label wf-label--rest">Everything else</p>{{/if}}
+        {{else}}
+        <a class="wf-card" href="{{url}}">
+          <time class="wf-card-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="MMM YYYY"}}</time>
+          <span class="wf-card-title">{{title}}</span>
+          <span class="wf-card-ex">{{excerpt words="30"}}</span>
+        </a>
+        {{/if}}
         {{/foreach}}
-      </ul>
+      </div>
       {{else}}
       <p class="empty-msg">Nothing published yet.</p>
       {{/if}}

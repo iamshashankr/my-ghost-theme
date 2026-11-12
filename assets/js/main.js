@@ -342,3 +342,14 @@
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initNowDecks);
   else initNowDecks();
 })();
+
+/* Writing page: show "New" on the latest essay only if it is under 45 days old */
+(function(){
+  function initNewBadge(){
+    document.querySelectorAll('[data-new-since]').forEach(function(el){
+      var d = new Date(el.getAttribute('data-new-since') + 'T00:00:00');
+      if (!isNaN(d) && (Date.now() - d.getTime()) < 45 * 864e5) el.classList.add('is-new');
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initNewBadge); else initNewBadge();
+})();
