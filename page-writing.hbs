@@ -28,31 +28,7 @@
       {{/if}}
     {{/get}}
 
-    <div class="writing-nl">
-      <h3 class="writing-nl-title">Stay in the loop</h3>
-      <p class="writing-nl-desc">Receive new essays sent directly to your inbox when published.</p>
-      {{#unless @member}}
-      <form class="sub-form" data-members-form="subscribe" novalidate>
-        <div class="sub-row">
-          <input class="sub-input" type="email" name="email" placeholder="your@email.com" required autocomplete="email">
-          <button class="sub-btn" type="submit">
-            <span class="sub-label">Subscribe</span>
-            <span class="sub-loading" hidden>…</span>
-          </button>
-        </div>
-        <p class="sub-meta">Free. Unsubscribe anytime.</p>
-      </form>
-      <div class="sub-success" hidden>
-        <p class="sub-success-msg">✓ Check your inbox to confirm your subscription.</p>
-        <p class="sub-success-sub">Can't find it? Check your spam folder.</p>
-      </div>
-      <div class="sub-error" hidden>
-        <p class="sub-error-msg">Something went wrong, please try again.</p>
-      </div>
-      {{else}}
-      <p class="member-note">✓ You're subscribed.</p>
-      {{/unless}}
-    </div>
+    {{> "subscribe-box"}}
 
   </div>
 </div>

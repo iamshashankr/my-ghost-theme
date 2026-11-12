@@ -58,35 +58,8 @@
       {{> "now-deck"}}
     </section>
 
-    {{!-- ── SUBSCRIBE: card (styles scoped to .home-nl) ── --}}
-    <section class="home-nl">
-      <div class="nl-head">
-        <svg class="nl-env" width="32" height="24" viewBox="0 0 30 22" aria-hidden="true"><rect x="1" y="1" width="28" height="20" rx="3" fill="var(--paper)" stroke="var(--paper-line)"/><path d="M2.5 3l12.5 8.5L27.5 3" fill="none" stroke="var(--paper-line)" stroke-width="1.4"/><rect x="20.5" y="4" width="5.5" height="6.5" rx="1" fill="#C8402F"/></svg>
-        <h3 class="writing-nl-title">Stay in the loop</h3>
-      </div>
-      <p class="writing-nl-desc">Receive new essays sent directly to your inbox when published.</p>
-      {{#unless @member}}
-      <form class="sub-form" data-members-form="subscribe" novalidate>
-        <div class="sub-row">
-          <input class="sub-input" type="email" name="email" placeholder="your@email.com" aria-label="Email address" required autocomplete="email">
-          <button class="sub-btn" type="submit">
-            <span class="sub-label">Subscribe</span>
-            <span class="sub-loading" hidden>…</span>
-          </button>
-        </div>
-        <p class="sub-meta">Free. Unsubscribe anytime.</p>
-      </form>
-      <div class="sub-success" hidden>
-        <p class="sub-success-msg">✓ Check your inbox to confirm your subscription.</p>
-        <p class="sub-success-sub">Can't find it? Check your spam folder.</p>
-      </div>
-      <div class="sub-error" hidden>
-        <p class="sub-error-msg">Something went wrong, please try again.</p>
-      </div>
-      {{else}}
-      <p class="member-note">✓ You're subscribed.</p>
-      {{/unless}}
-    </section>
+    {{!-- ── SUBSCRIBE: shared box (partials/subscribe-box.hbs) ── --}}
+    {{> "subscribe-box"}}
 
   </div>
 </div>

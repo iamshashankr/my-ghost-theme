@@ -136,7 +136,6 @@ button{cursor:pointer;border:none;background:none;font:inherit}
 .sc-meta{font-size:11px;color:var(--muted);margin-top:2px}
 
 /* ── NEWSLETTER ── */
-.home-nl{margin-top:60px;padding-top:0}
 .nl-title{font-size:20px;font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
 .nl-desc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:20px;max-width:400px}
 .acc{color:var(--acc)}
@@ -587,8 +586,6 @@ button{cursor:pointer;border:none;background:none;font:inherit}
 .sub-success-sub { font-size: 12.5px; color: var(--muted); }
 .sub-error { padding: 12px 16px; background: rgba(220,60,60,.08); border-radius: 6px; margin-top: 8px; }
 .sub-error-msg { font-size: 13.5px; color: #cc3333; }
-.home-nl { margin-top: 48px; }
-.writing-nl { margin-top: 52px; }
 .writing-nl-title { font-size: 18px; font-weight: 700; letter-spacing: -.02em; margin-bottom: 8px; }
 .writing-nl-desc { font-size: 13.5px; color: var(--muted); margin-bottom: 18px; line-height: 1.65; max-width: 420px; }
 .member-note { padding: 12px 16px; background: var(--card); border-radius: 6px; font-size: 13px; color: var(--muted); }
@@ -849,18 +846,19 @@ button{cursor:pointer;border:none;background:none;font:inherit}
 .tl-read{flex-shrink:0;font-size:12px;color:var(--soft);white-space:nowrap}
 .tl-ex{display:block;margin-top:4px;font-size:13px;line-height:1.55;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-/* ── SUBSCRIBE · homepage card (Writing page keeps its own style) ── */
-.home-nl{margin-top:64px;padding:24px;border-radius:18px;background:var(--bg2)}
-.home-nl .nl-head{display:flex;align-items:center;gap:12px;margin-bottom:10px}
-.home-nl .nl-env{display:block;flex-shrink:0}
-.home-nl .writing-nl-title{margin:0;font-size:18px;font-weight:600;letter-spacing:-.012em}
-.home-nl .writing-nl-desc{margin:0 0 18px;max-width:none;font-size:14px;line-height:1.6}
-.home-nl .sub-row{gap:4px;margin-bottom:10px;padding:4px;flex-wrap:nowrap;background:var(--bg);border:1px solid var(--pill-line);border-radius:12px;transition:border-color var(--ease)}
-.home-nl .sub-row:focus-within{border-color:var(--acc)}
-.home-nl .sub-input{flex:1 1 auto;height:42px;padding:0 12px;border:0;border-radius:9px;background:transparent;font-size:14px}
-.home-nl .sub-btn{width:auto;height:42px;padding:0 20px;border-radius:9px;font-size:14px}
-.home-nl .sub-meta{margin:0 0 0 2px;font-size:11.5px;line-height:1.4;color:var(--soft)}
-.home-nl .sub-success,.home-nl .member-note{background:var(--bg);border-radius:12px}
+/* ── SUBSCRIBE · shared card (homepage + Writing page) · partials/subscribe-box.hbs ── */
+.nl-card{margin-top:64px;padding:24px;border-radius:18px;background:var(--bg2)}
+.nl-card .nl-head{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.nl-card .nl-icon{display:block;flex-shrink:0;width:34px;height:34px;filter:drop-shadow(0 3px 3px rgba(0,0,0,.12));transition:transform .5s cubic-bezier(.3,1.6,.45,1)}
+.nl-card:hover .nl-icon{transform:translateY(-3px) rotate(-6deg)}
+.nl-card .writing-nl-title{margin:0;font-size:18px;font-weight:600;letter-spacing:-.012em}
+.nl-card .writing-nl-desc{margin:0 0 18px;max-width:none;font-size:14px;line-height:1.6}
+.nl-card .sub-row{gap:4px;margin-bottom:10px;padding:4px;flex-wrap:nowrap;background:var(--bg);border:1px solid var(--pill-line);border-radius:12px;transition:border-color var(--ease)}
+.nl-card .sub-row:focus-within{border-color:var(--acc)}
+.nl-card .sub-input{flex:1 1 auto;height:42px;padding:0 12px;border:0;border-radius:9px;background:transparent;font-size:14px}
+.nl-card .sub-btn{width:auto;height:42px;padding:0 20px;border-radius:9px;font-size:14px}
+.nl-card .sub-meta{margin:0 0 0 2px;font-size:11.5px;line-height:1.4;color:var(--soft)}
+.nl-card .sub-success,.nl-card .member-note{background:var(--bg);border-radius:12px}
 
 @media(max-width:600px){
   .notes{grid-template-columns:minmax(0,1fr);gap:22px;padding:10px 6px 0}
@@ -868,12 +866,12 @@ button{cursor:pointer;border:none;background:none;font:inherit}
   .tl-month::before{left:-24px}
   .tl-title{font-size:15.5px}
   .tl-ex{display:none}
-  .home-nl{margin-top:52px;padding:20px}
-  .home-nl .writing-nl-title{font-size:17px}
-  .home-nl .writing-nl-desc{font-size:13.5px}
-  .home-nl .sub-row{flex-wrap:nowrap}
-  .home-nl .sub-input{flex:1 1 auto}
-  .home-nl .sub-btn{width:auto;padding:0 16px}
+  .nl-card{margin-top:52px;padding:20px}
+  .nl-card .writing-nl-title{font-size:17px}
+  .nl-card .writing-nl-desc{font-size:13.5px}
+  .nl-card .sub-row{flex-wrap:nowrap}
+  .nl-card .sub-input{flex:1 1 auto}
+  .nl-card .sub-btn{width:auto;padding:0 16px}
 }
 @media(prefers-reduced-motion:reduce){.note,.tl-title{transition:none}}
 
