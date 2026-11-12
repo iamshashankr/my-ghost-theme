@@ -2,7 +2,11 @@
       The members script (main.js) uses the form's parent, so keep the form a direct child. --}}
 <section class="nl-card">
   <div class="nl-head">
-    <img class="nl-icon" src="{{asset 'images/icons/inbox.webp'}}" alt="" width="34" height="34" decoding="async">
+    <span class="nl-post" aria-hidden="true"><span class="nl-anim">
+      <img class="nl-box" src="{{asset 'images/icons/postbox.webp'}}" alt="" width="40" height="40" decoding="async">
+      <img class="nl-letter" src="{{asset 'images/icons/letter.webp'}}" alt="" width="16" height="16" decoding="async">
+      <img class="nl-box nl-front" src="{{asset 'images/icons/postbox.webp'}}" alt="" width="40" height="40" decoding="async">
+    </span></span>
     <h3 class="writing-nl-title">Stay in the loop</h3>
   </div>
   <p class="writing-nl-desc">Receive new essays sent directly to your inbox when published.</p>
@@ -15,7 +19,7 @@
         <span class="sub-loading" hidden>…</span>
       </button>
     </div>
-    <p class="sub-meta">Free. Unsubscribe anytime.</p>
+    <p class="sub-meta">It’s free, and you can unsubscribe anytime.</p>
   </form>
   <div class="sub-success" hidden>
     <p class="sub-success-msg">✓ Check your inbox to confirm your subscription.</p>

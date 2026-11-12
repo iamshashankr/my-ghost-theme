@@ -64,6 +64,7 @@
         if(res.status === 201 || res.ok) {
           form.style.display = 'none';
           if(ok) ok.hidden = false;
+          playPostbox(wrap);
         } else {
           return res.json().then(function(data) {
             throw new Error((data && data.errors && data.errors[0] && data.errors[0].message) || 'failed');
@@ -130,6 +131,7 @@
     initNavPill();
     initKeywords();
     initTimeline();
+    initPostbox();
 
 
     /* Open all external links in a new tab */
@@ -160,6 +162,21 @@
     }, 60000);
 
   });
+
+  /* ── SUBSCRIBE POSTBOX · a letter drops into the 3D postbox ──────────────
+     Plays on hover (CSS), on tap, and once more after a successful sign-up.
+  ─────────────────────────────────────────────────────────────────────── */
+  function playPostbox(root){
+    var pb = root && root.querySelector ? root.querySelector('.nl-post') : null;
+    if(!pb) return;
+    pb.classList.remove('is-play'); void pb.offsetWidth; pb.classList.add('is-play');
+    clearTimeout(pb._t); pb._t = setTimeout(function(){ pb.classList.remove('is-play'); }, 1300);
+  }
+  function initPostbox(){
+    document.querySelectorAll('.nl-card .nl-post').forEach(function(pb){
+      pb.addEventListener('click', function(){ playPostbox(pb.parentElement); });
+    });
+  }
 
   /* ── WRITING TIMELINE · group recent posts by month ────────────────────
      Ghost lists posts flat; consecutive posts from the same month hide

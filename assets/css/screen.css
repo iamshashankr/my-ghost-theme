@@ -849,8 +849,16 @@ button{cursor:pointer;border:none;background:none;font:inherit}
 /* ── SUBSCRIBE · shared card (homepage + Writing page) · partials/subscribe-box.hbs ── */
 .nl-card{margin-top:64px;padding:24px;border-radius:18px;background:var(--bg2)}
 .nl-card .nl-head{display:flex;align-items:center;gap:12px;margin-bottom:10px}
-.nl-card .nl-icon{display:block;flex-shrink:0;width:34px;height:34px;filter:drop-shadow(0 3px 3px rgba(0,0,0,.12));transition:transform .5s cubic-bezier(.3,1.6,.45,1)}
-.nl-card:hover .nl-icon{transform:translateY(-3px) rotate(-6deg)}
+.nl-card .nl-post{position:relative;flex-shrink:0;width:40px;height:40px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.nl-card .nl-anim{position:absolute;inset:0;transform-origin:50% 100%}
+.nl-card .nl-box{position:absolute;inset:0;width:40px;height:40px;filter:drop-shadow(0 3px 3px rgba(0,0,0,.14))}
+.nl-card .nl-front{z-index:2;filter:none;clip-path:inset(27% 0 0 0)}
+.nl-card .nl-letter{position:absolute;z-index:1;left:12px;top:2px;width:16px;height:16px;opacity:0;pointer-events:none;filter:drop-shadow(0 1px 1px rgba(0,0,0,.15))}
+.nl-card .nl-post:hover .nl-letter,.nl-card .nl-post.is-play .nl-letter{animation:nl-drop 1.15s cubic-bezier(.45,.05,.3,1) both}
+.nl-card .nl-post:hover .nl-anim,.nl-card .nl-post.is-play .nl-anim{animation:nl-gulp 1.15s ease both}
+@keyframes nl-drop{0%{opacity:0;transform:translate(-18px,-22px) rotate(-32deg) scale(1.15)}18%{opacity:1}55%{opacity:1;transform:translate(0,-9px) rotate(-3deg) scale(1)}72%{transform:translate(0,-6px) rotate(0) scale(.94)}100%{opacity:1;transform:translate(0,16px) rotate(0) scale(.9)}}
+@keyframes nl-gulp{0%,70%{transform:none}80%{transform:scale(1.06,.92)}90%{transform:scale(.97,1.04) translateY(-1px)}100%{transform:none}}
+@media(prefers-reduced-motion:reduce){.nl-card .nl-letter,.nl-card .nl-anim{animation:none!important}}
 .nl-card .writing-nl-title{margin:0;font-size:18px;font-weight:600;letter-spacing:-.012em}
 .nl-card .writing-nl-desc{margin:0 0 18px;max-width:none;font-size:14px;line-height:1.6}
 .nl-card .sub-row{gap:4px;margin-bottom:10px;padding:4px;flex-wrap:nowrap;background:var(--bg);border:1px solid var(--pill-line);border-radius:12px;transition:border-color var(--ease)}
