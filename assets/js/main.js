@@ -185,13 +185,13 @@
      Taps on links inside a word still follow the link.
   ─────────────────────────────────────────────────────────────────────── */
   function initKeywords(){
-    document.querySelectorAll('.kw').forEach(function(k){
-      if(!k.querySelector('.ic, .kw-face')) return;
+    document.querySelectorAll('.kw, .kw-pop').forEach(function(k){
+      if(!k.querySelector('.kw-face, .pop')) return;
       var t;
       k.addEventListener('click', function(e){
         if(e.target.closest('a')) return;
         k.classList.remove('is-play'); void k.offsetWidth; k.classList.add('is-play');
-        clearTimeout(t); t = setTimeout(function(){ k.classList.remove('is-play'); }, 1600);
+        clearTimeout(t); t = setTimeout(function(){ k.classList.remove('is-play'); }, 2200);
       });
     });
   }
