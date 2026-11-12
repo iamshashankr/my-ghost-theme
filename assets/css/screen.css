@@ -202,6 +202,32 @@ button{cursor:pointer;border:none;background:none;font:inherit}
 .contact-p{font-size:14.5px;line-height:1.75;color:var(--muted)}
 .contact-p a{color:var(--txt);font-weight:500;text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--acc);transition:color var(--ease)}
 .contact-p a:hover{color:var(--acc)}
+/* Get in touch · three doors */
+.ct-list{margin:14px -12px 0}
+.ct-row{position:relative;display:flex;align-items:center;gap:16px;padding:13px 12px;border-radius:14px;color:var(--txt);text-decoration:none;transition:background-color .25s ease}
+.ct-row+.ct-row::before{content:"";position:absolute;left:12px;right:12px;top:0;height:1px;background:var(--tl-line);transition:opacity .2s ease}
+.ct-ic{width:44px;height:44px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:12px;background:var(--bg);color:var(--muted);box-shadow:inset 0 0 0 1px var(--pill-line),0 4px 10px -6px rgba(0,0,0,.18);transition:transform .45s cubic-bezier(.3,1.6,.45,1),background-color .25s ease,color .25s ease}
+.ct-ic svg{width:20px;height:20px}
+.ct-txt{min-width:0;line-height:1.35}
+.ct-name{display:block;font-size:16px;font-weight:600;letter-spacing:-.01em}
+.ct-handle{display:block;margin-top:2px;font-size:13.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ct-badge{display:inline-block;margin-left:8px;padding:2px 7px;border-radius:999px;background:rgba(126,217,87,.18);color:#3c7a22;font-size:10.5px;font-weight:600;letter-spacing:.02em;vertical-align:2px}
+[data-theme="dark"] .ct-badge{color:var(--acc)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .ct-badge{color:var(--acc)}}
+.ct-go{margin-left:auto;display:flex;align-items:center;gap:6px;flex-shrink:0;font-size:13px;font-weight:500;color:var(--muted)}
+.ct-lab{opacity:0;transform:translateX(6px);transition:opacity .2s ease,transform .3s ease}
+.ct-ar{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:50%;transition:background-color .2s ease,color .2s ease,transform .3s cubic-bezier(.3,1.5,.5,1)}
+@media(hover:hover){
+.ct-row:hover{background:rgba(127,127,127,.08)}
+.ct-row:hover::before,.ct-row:hover+.ct-row::before{opacity:0}
+.ct-row:hover .ct-ic{transform:rotate(-8deg) scale(1.06);background:var(--txt);color:var(--bg)}
+.ct-row:hover .ct-go{color:var(--txt)}
+.ct-row:hover .ct-lab{opacity:1;transform:none}
+.ct-row:hover .ct-ar{background:var(--acc);color:#0a0a0a;transform:rotate(-45deg)}
+}
+.ct-row:active{background:rgba(127,127,127,.1)}
+.ct-row:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+@media(max-width:600px){.ct-list{margin:12px -8px 0}.ct-row{gap:14px;padding:12px 8px}.ct-row+.ct-row::before{left:8px;right:8px}.ct-ic{width:40px;height:40px}}
 
 /* ════════════════════════════════
    SHELF PAGE — IMAGE-BASED CARDS
