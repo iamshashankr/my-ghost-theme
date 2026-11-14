@@ -128,13 +128,6 @@ button{cursor:pointer;border:none;background:none;font:inherit}
 .pr-date{font-size:12px;color:var(--faint);white-space:nowrap;flex-shrink:0}
 .pr-tags{display:flex;gap:5px;margin-top:7px;flex-wrap:wrap}
 
-/* ── SHELF (HOME) — 4 cards ── */
-.shelf-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.shelf-card{background:var(--card);border-radius:var(--r);padding:13px 14px;display:flex;flex-direction:column;gap:5px}
-.sc-label{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
-.sc-title{font-size:12.5px;font-weight:500;line-height:1.35;color:var(--txt)}
-.sc-meta{font-size:11px;color:var(--muted);margin-top:2px}
-
 /* ── NEWSLETTER ── */
 .nl-title{font-size:20px;font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
 .nl-desc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:20px;max-width:400px}
@@ -228,81 +221,6 @@ button{cursor:pointer;border:none;background:none;font:inherit}
 .ct-row:active{background:rgba(127,127,127,.1)}
 .ct-row:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 @media(max-width:600px){.ct-list{margin:12px -8px 0}.ct-row{gap:14px;padding:12px 8px}.ct-row+.ct-row::before{left:8px;right:8px}.ct-ic{width:40px;height:40px}}
-
-/* ════════════════════════════════
-   SHELF PAGE — IMAGE-BASED CARDS
-   ════════════════════════════════ */
-.shelf-page{padding-bottom:80px}
-
-.shelf-cat{margin-bottom:56px}
-.shelf-cat-label{
-  font-size:10.5px;font-weight:700;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--faint);
-  margin-bottom:20px;
-}
-
-/* Grid: 3 cols for books/music, wider for films */
-.shelf-img-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.shelf-img-grid--wide{grid-template-columns:repeat(4,1fr)}
-
-/* Image card */
-.shelf-img-card{
-  display:flex;flex-direction:column;gap:0;
-  border-radius:var(--r);overflow:hidden;
-  background:var(--card);
-  transition:transform var(--ease);
-}
-.shelf-img-card:hover{transform:translateY(-2px)}
-
-/* Featured card: slight green tint */
-.shelf-img-card--featured{
-  outline:1.5px solid rgba(126,217,87,.35);
-}
-
-/* Cover image area */
-.sic-cover{
-  position:relative;
-  display:flex;align-items:center;justify-content:center;
-  overflow:hidden;
-}
-
-/* Book: portrait ratio */
-.sic-cover--book{aspect-ratio:2/3}
-/* Film: landscape/poster ratio */
-.sic-cover--film{aspect-ratio:2/3}
-/* Album: square */
-.sic-cover--album{aspect-ratio:1/1}
-/* Tool: square, shorter */
-.sic-cover--tool{aspect-ratio:1/1;max-height:120px}
-
-.sic-cover img{
-  position:absolute;inset:0;
-  width:100%;height:100%;
-  object-fit:cover;
-  transition:opacity .3s ease;
-}
-/* placeholder emoji shown when no img */
-.sic-placeholder{font-size:32px;line-height:1;opacity:.4;user-select:none}
-/* hide placeholder when image loads */
-.sic-cover img ~ .sic-placeholder{display:none}
-.sic-cover img{display:block}
-
-/* Card text area */
-.sic-info{padding:14px 15px 16px;display:flex;flex-direction:column;gap:3px;flex:1}
-.sic-badge{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--acc-d);margin-bottom:5px}
-.sic-title{font-size:13px;font-weight:600;color:var(--txt);line-height:1.35}
-.sic-meta{font-size:11.5px;color:var(--muted);margin-top:1px}
-.sic-note{font-size:11.5px;color:var(--muted);font-style:italic;margin-top:6px;line-height:1.5}
-
-/* Keep old shelf cat styles for about fallback */
-.shelf-full-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
-.shelf-item{background:var(--card);border-radius:var(--r);padding:15px 16px}
-.shelf-item--now{background:#edf7e4}
-[data-theme="dark"] .shelf-item--now{background:#0f1f0a}
-.shelf-badge{display:block;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--acc-d);margin-bottom:7px}
-.si-title{font-size:13px;font-weight:500;line-height:1.35;color:var(--txt);margin-bottom:3px}
-.si-meta{font-size:11.5px;color:var(--muted)}
-.si-note{font-size:11.5px;color:var(--muted);line-height:1.5;font-style:italic;margin-top:6px}
 
 /* ── SINGLE POST ── */
 .single-post{padding-bottom:60px}
@@ -404,9 +322,6 @@ button{cursor:pointer;border:none;background:none;font:inherit}
   .site-header{top:10px;margin-top:10px}
   .hdr-pill .nav a{padding:5px 9px;font-size:13px}
   .hdr-meta{display:none}
-    .shelf-grid{grid-template-columns:1fr 1fr;gap:7px}
-  .shelf-img-grid{grid-template-columns:1fr 1fr}
-  .shelf-img-grid--wide{grid-template-columns:1fr 1fr}
   .post-nav{grid-template-columns:1fr;padding:28px 18px 44px}
   .c-row{grid-template-columns:1fr;gap:2px;padding:9px 0}
   .ck{font-size:11px}
@@ -415,79 +330,10 @@ button{cursor:pointer;border:none;background:none;font:inherit}
       .gh-content .kg-width-wide,.gh-content .kg-width-full{width:100%;margin-left:0;margin-right:0}
   .value-desc{padding-left:0}
 }
-@media(max-width:380px){.shelf-grid{grid-template-columns:1fr}.shelf-img-grid,.shelf-img-grid--wide{grid-template-columns:1fr}}
 
 /* ════════════════════════════════
    V7 ADDITIONS
    ════════════════════════════════ */
-
-/* ── HOME SHELF: image cards in 2×2 grid ── */
-.home-shelf-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-}
-
-.home-shelf-card {
-  display: flex;
-  flex-direction: column;
-  border-radius: var(--r);
-  overflow: hidden;
-  background: var(--card);
-  transition: transform var(--ease);
-  cursor: pointer;
-}
-.home-shelf-card:hover { transform: translateY(-2px); }
-
-.hsc-cover {
-  position: relative;
-  aspect-ratio: 3/4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-.hsc-cover img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.hsc-emoji {
-  font-size: 28px;
-  line-height: 1;
-  opacity: 0.45;
-  user-select: none;
-  position: relative;
-  z-index: 1;
-}
-/* hide emoji when image is present */
-.hsc-cover img + .hsc-emoji { display: none; }
-
-.hsc-info {
-  padding: 11px 12px 13px;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-.hsc-label {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--faint);
-}
-.hsc-title {
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--txt);
-  line-height: 1.3;
-}
-.hsc-meta {
-  font-size: 11px;
-  color: var(--muted);
-}
 
 /* ── SUBSCRIBE SUCCESS / ERROR STATES ── */
 
@@ -517,14 +363,6 @@ button{cursor:pointer;border:none;background:none;font:inherit}
 .sub-error-msg {
   font-size: 13.5px;
   color: #cc3333;
-}
-
-/* ── RESPONSIVE: home shelf ── */
-@media(max-width:600px) {
-  .home-shelf-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-}
-@media(max-width:380px) {
-  .home-shelf-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* ════════════════════════════════
@@ -690,9 +528,6 @@ button{cursor:pointer;border:none;background:none;font:inherit}
   .sub-input { flex: 1 1 100%; }
   .sub-btn { width: 100%; text-align: center; }
 
-  /* Shelf/Now: 2 col */
-  .shelf-full-grid { grid-template-columns: 1fr 1fr; }
-
   .post-nav { grid-template-columns: 1fr; padding: 0 18px 44px; }
   .c-row { grid-template-columns: 1fr; gap: 2px; padding: 9px 0; }
   .ck { font-size: 11px; }
@@ -702,7 +537,6 @@ button{cursor:pointer;border:none;background:none;font:inherit}
 }
 @media(max-width: 380px){
   .hdr-pill .nav a { padding: 5px 7px; }
-  .shelf-full-grid { grid-template-columns: 1fr; }
 }
 /* BULLETS PAGE */
 .bullets-page { padding-bottom: 80px; }
