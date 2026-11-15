@@ -1,25 +1,29 @@
 {{!< default}}
 
 {{!-- ════════════════════════════════════════
-  SINGLE POST — post.hbs
-  {{#post}} wrapper explicitly sets context,
-  fixing the "undefined" content rendering bug.
+  SINGLE ESSAY — post.hbs
+  Reading bar · ← Writing · title · date, read time, copy link
+  · essay · ✦ ✦ ✦ · Keep reading (3 newest, not this one) + View all · Subscribe
 ════════════════════════════════════════ --}}
 
 {{#post}}
-<article class="single-post">
+<div class="read-bar" aria-hidden="true"><i data-read-bar></i></div>
+
+<article class="single-post essay" data-essay>
 
   <div class="post-wrap inner">
 
     <header class="post-hdr">
-      {{#primary_tag}}<a href="{{url}}" class="post-cat">{{name}}</a>{{/primary_tag}}
+      <a href="/writing/" class="es-back">← Writing</a>
       <h1 class="post-title">{{title}}</h1>
-      {{#if custom_excerpt}}<p class="post-sub">{{custom_excerpt}}</p>{{/if}}
-      <div class="post-byline">
-        <time class="post-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="Do MMMM YYYY"}}</time>
-        <button type="button" class="copy-link-btn" aria-label="Copy link to this post" data-url="{{url absolute="true"}}">
-          <svg class="cl-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-          <svg class="cl-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      <div class="es-meta">
+        <time datetime="{{date format='YYYY-MM-DD'}}">{{date format="D MMMM YYYY"}}</time>
+        <i aria-hidden="true"></i>
+        <span>{{reading_time minute="1 min read" minutes="% min read"}}</span>
+        <button type="button" class="copy-link-btn es-copy" data-url="{{url absolute="true"}}">
+          <svg class="cl-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <svg class="cl-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          <span class="cl-label">Copy link</span><span class="cl-done">Link copied</span>
         </button>
       </div>
     </header>
@@ -40,34 +44,33 @@
       {{content}}
     </div>
 
-    <footer class="post-foot">
-      <a href="/writing" class="back-link">← Back to Writing</a>
-      {{#if tags}}
-      <div class="post-tags">
-        {{#foreach tags}}<a href="{{url}}" class="tag-chip">{{name}}</a>{{/foreach}}
+    <p class="es-end" aria-hidden="true">✦ ✦ ✦</p>
+
+    {{#get "posts" filter="id:-{{id}}+tag:-list+tag:-bullet" limit="3" order="published_at desc" as |more pages|}}
+    {{#if more}}
+    <section class="es-more" aria-label="Keep reading">
+      <p class="es-more-label">Keep reading</p>
+      <div class="es-more-grid">
+        {{#foreach more}}
+        <a class="wf-card" href="{{url}}">
+          <time class="wf-card-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="MMM YYYY"}}</time>
+          <span class="wf-card-title">{{title}}</span>
+          <span class="wf-card-ex">{{excerpt words="30"}}</span>
+        </a>
+        {{/foreach}}
+        <a class="es-all" href="/writing/">
+          {{#get "posts" filter="tag:-list+tag:-bullet" limit="1" as |x p|}}<span class="es-all-n">{{p.total}} essays</span>{{/get}}
+          <span class="es-all-go">View all writing <b aria-hidden="true">→</b></span>
+        </a>
       </div>
-      {{/if}}
-    </footer>
+    </section>
+    {{/if}}
+    {{/get}}
+
+    <div class="es-rule" aria-hidden="true"></div>
+    {{> "subscribe-box"}}
 
   </div>
 
 </article>
-
-{{#if prev_post}}{{#if next_post}}
-<nav class="post-nav inner">
-  {{#if prev_post}}
-  <a class="pag-item" href="{{prev_post.url}}">
-    <span class="pag-dir">← Previous</span>
-    <span class="pag-name">{{prev_post.title}}</span>
-  </a>
-  {{/if}}
-  {{#if next_post}}
-  <a class="pag-item pag-r" href="{{next_post.url}}">
-    <span class="pag-dir">Next →</span>
-    <span class="pag-name">{{next_post.title}}</span>
-  </a>
-  {{/if}}
-</nav>
-{{/if}}{{/if}}
-
 {{/post}}

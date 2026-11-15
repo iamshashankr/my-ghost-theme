@@ -353,3 +353,23 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initNewBadge); else initNewBadge();
 })();
+
+/* Essay page: green reading bar along the top */
+(function(){
+  function initReadBar(){
+    var bar = document.querySelector('[data-read-bar]'), body = document.querySelector('.essay .post-body');
+    if (!bar || !body) return;
+    var ticking = false;
+    function update(){
+      ticking = false;
+      var r = body.getBoundingClientRect(), total = r.height - window.innerHeight * 0.6;
+      var p = total > 0 ? Math.min(1, Math.max(0, -r.top / total)) : 1;
+      bar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
+    }
+    function onScroll(){ if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initReadBar); else initReadBar();
+})();
