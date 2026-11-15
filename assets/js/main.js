@@ -362,8 +362,9 @@
     var ticking = false;
     function update(){
       ticking = false;
-      var r = body.getBoundingClientRect(), total = r.height - window.innerHeight * 0.6;
-      var p = total > 0 ? Math.min(1, Math.max(0, -r.top / total)) : 1;
+      /* 0 at the top of the page, 1 when the essay's last line reaches the bottom of the screen */
+      var end = body.getBoundingClientRect().bottom + window.scrollY - window.innerHeight;
+      var p = end > 0 ? Math.min(1, Math.max(0, window.scrollY / end)) : 1;
       bar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
     }
     function onScroll(){ if (!ticking) { ticking = true; requestAnimationFrame(update); } }
