@@ -3,9 +3,12 @@
 
 {{!-- ════════════════════════════════════════
   LISTS PAGE  |  slug: "lists"
-  Each section lives in its own partial and is edited in code:
-  - Books → partials/lists-books.hbs
-  (Movies & shows, artists, places and tools will follow the same way.)
+  Each section is its own partial:
+  - Books   → partials/lists-books.hbs   (edit by hand)
+  - Movies  → partials/lists-films.hbs   (written daily from Letterboxd by scripts/letterboxd.py)
+  - Artists → partials/lists-artists.hbs (edit by hand)
+  - Places  → partials/lists-places.hbs  (edit by hand)
+  - Tools   → partials/lists-tools.hbs   (edit by hand)
 ════════════════════════════════════════ --}}
 
 <div class="lists-page">
@@ -13,10 +16,14 @@
 
     <header class="page-hdr">
       <h1 class="page-title">Lists</h1>
-      <p class="page-desc">Everything from values and things I do for fun, to books I'm reading, movies or shows I'm watching, music I'm listening to, and anything else I feel like making a list.</p>
+      <p class="page-desc">Everything from the books I’m reading, the movies or shows I’m watching, the music I’m listening to, and anything else I feel like listing.</p>
     </header>
 
     {{> "lists-books"}}
+    {{> "lists-films"}}
+    {{> "lists-artists"}}
+    {{> "lists-places"}}
+    {{> "lists-tools"}}
 
   </div>
 </div>

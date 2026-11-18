@@ -3,6 +3,7 @@ name: Deploy Ghost Theme
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -26,6 +27,7 @@ jobs:
           zip -r "/tmp/build/${{ steps.theme.outputs.name }}.zip" . \
             -x ".git/*" \
             -x ".github/*" \
+            -x "scripts/*" \
             -x "node_modules/*" \
             -x "*.DS_Store"
 

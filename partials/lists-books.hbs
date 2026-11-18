@@ -1,58 +1,40 @@
-{{!-- ════════════════════════════════════════
-  BOOKS SHELF  (Lists page)
-
-  To change a book: edit its <a class="bk"> block below.
-  - href   → the book's Goodreads page
-  - src    → cover image (on the Goodreads book page, right-click the cover → Copy image address)
-  - <b>    → short title,  <span> → author
-  Groups: Reading now (1–2 books) · Favorites · Up next.
-  If you're reading two books, move one book from Favorites into Reading now.
-════════════════════════════════════════ --}}
+{{!-- BOOKS (Lists page). Edit by hand.
+  Each book is one <a class="ls-r"> block:
+  - href → the book's Goodreads page
+  - img  → a cover in assets/images/lists/ (portrait covers: height 128; square ones: 96)
+  - <b>  → title, ls-sub → author
+  - tag  → ls-tg--now (Reading now), ls-tg--fav (Favorite) or ls-tg--next (Up next)
+  Order: Reading now, then Favorites, then Up next. --}}
 <section class="ls-sec" aria-labelledby="ls-books">
   <div class="ls-sh">
-    <h2 id="ls-books">Books</h2>
-    <a class="ls-more" href="https://www.goodreads.com/user/show/206515453-shashank-r" target="_blank" rel="noopener">All on Goodreads <span aria-hidden="true">↗</span></a>
+    <h2 id="ls-books">Books on my shelf</h2>
+    <a class="ls-more" href="https://www.goodreads.com/user/show/206515453-shashank-r" target="_blank" rel="noopener">All on Goodreads<svg class="ls-ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9M9 4.5 12.5 8 9 11.5"/></svg></a>
   </div>
-
-  <div class="shelf"><div class="shelf-in">
-
-    <div class="shelf-grp shelf-grp--now">
-      <p class="shelf-lbl"><i class="shelf-dot" aria-hidden="true"></i>Reading now</p>
-      <div class="shelf-row">
-        <a class="bk" href="https://www.goodreads.com/book/show/6900.Tuesdays_with_Morrie" target="_blank" rel="noopener">
-          <span class="bk-3d"><span class="bk-sp" style="background-image:url(https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1423763749i/6900.jpg)"></span><img class="bk-fc" src="https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1423763749i/6900.jpg" alt="Tuesdays with Morrie cover" width="116" height="174" loading="lazy" decoding="async"></span>
-          <span class="bk-cap"><b>Tuesdays with Morrie</b><span>Mitch Albom</span></span>
-        </a>
-      </div>
-    </div>
-
-    <div class="shelf-grp shelf-grp--fav">
-      <p class="shelf-lbl"><svg class="shelf-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L12 16.5l-5.4 2.9 1.2-5.9L3.4 9.4l6-.7z"/></svg>Favorites</p>
-      <div class="shelf-row">
-        <a class="bk" href="https://www.goodreads.com/book/show/13099738-steal-like-an-artist" target="_blank" rel="noopener">
-          <span class="bk-3d"><span class="bk-sp" style="background-image:url(https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1404576602i/13099738.jpg)"></span><img class="bk-fc" src="https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1404576602i/13099738.jpg" alt="Steal Like an Artist cover" width="116" height="174" loading="lazy" decoding="async"></span>
-          <span class="bk-cap"><b>Steal Like an Artist</b><span>Austin Kleon</span></span>
-        </a>
-        <a class="bk" href="https://www.goodreads.com/book/show/25856606-the-fault-in-our-stars" target="_blank" rel="noopener">
-          <span class="bk-3d"><span class="bk-sp" style="background-image:url(https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1436142804i/25856606.jpg)"></span><img class="bk-fc" src="https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1436142804i/25856606.jpg" alt="The Fault in Our Stars cover" width="116" height="174" loading="lazy" decoding="async"></span>
-          <span class="bk-cap"><b>The Fault in Our Stars</b><span>John Green</span></span>
-        </a>
-      </div>
-    </div>
-
-    <div class="shelf-grp shelf-grp--next">
-      <p class="shelf-lbl"><svg class="shelf-bm" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5h10a1 1 0 0 1 1 1v16l-6-3.8-6 3.8v-16a1 1 0 0 1 1-1z"/></svg>Up next</p>
-      <div class="shelf-row">
-        <a class="bk" href="https://www.goodreads.com/book/show/139417550-the-power-of-e-q" target="_blank" rel="noopener">
-          <span class="bk-3d"><span class="bk-sp" style="background-image:url(https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1682427777i/139417550.jpg)"></span><img class="bk-fc" src="https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1682427777i/139417550.jpg" alt="The Power of E.Q. cover" width="116" height="174" loading="lazy" decoding="async"></span>
-          <span class="bk-cap"><b>The Power of E.Q.</b><span>Patrick King</span></span>
-        </a>
-        <a class="bk" href="https://www.goodreads.com/book/show/11468377-thinking-fast-and-slow" target="_blank" rel="noopener">
-          <span class="bk-3d"><span class="bk-sp" style="background-image:url(https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1317793965i/11468377.jpg)"></span><img class="bk-fc" src="https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1317793965i/11468377.jpg" alt="Thinking, Fast and Slow cover" width="116" height="174" loading="lazy" decoding="async"></span>
-          <span class="bk-cap"><b>Thinking, Fast and Slow</b><span>Daniel Kahneman</span></span>
-        </a>
-      </div>
-    </div>
-
-  </div></div>
+  <div class="ls-list">
+    <a class="ls-r" href="https://www.goodreads.com/book/show/6900.Tuesdays_with_Morrie" target="_blank" rel="noopener">
+      <span class="ls-th" style="--th:128px"><img class="ls-cover" src="{{asset "images/lists/book-morrie.jpg"}}" alt="Tuesdays with Morrie cover" width="82" height="128" loading="lazy" decoding="async"></span>
+      <span class="ls-tx"><b>Tuesdays with Morrie</b><span class="ls-sub">Mitch Albom</span><span class="ls-tg ls-tg--now"><i class="ls-tg-ic"><b class="ls-pulse"></b></i>Reading now</span></span>
+      <svg class="ls-go" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9M9 4.5 12.5 8 9 11.5"/></svg>
+    </a>
+    <a class="ls-r" href="https://www.goodreads.com/book/show/13099738-steal-like-an-artist" target="_blank" rel="noopener">
+      <span class="ls-th" style="--th:128px"><img class="ls-cover" src="{{asset "images/lists/book-steal.jpg"}}" alt="Steal Like an Artist cover" width="96" height="96" loading="lazy" decoding="async"></span>
+      <span class="ls-tx"><b>Steal Like an Artist</b><span class="ls-sub">Austin Kleon</span><span class="ls-tg ls-tg--fav"><i class="ls-tg-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L12 16.5l-5.4 2.9 1.2-5.9L3.4 9.4l6-.7z" fill="currentColor"/></svg></i>Favorite</span></span>
+      <svg class="ls-go" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9M9 4.5 12.5 8 9 11.5"/></svg>
+    </a>
+    <a class="ls-r" href="https://www.goodreads.com/book/show/25856606-the-fault-in-our-stars" target="_blank" rel="noopener">
+      <span class="ls-th" style="--th:128px"><img class="ls-cover" src="{{asset "images/lists/book-fault.jpg"}}" alt="The Fault in Our Stars cover" width="85" height="128" loading="lazy" decoding="async"></span>
+      <span class="ls-tx"><b>The Fault in Our Stars</b><span class="ls-sub">John Green</span><span class="ls-tg ls-tg--fav"><i class="ls-tg-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L12 16.5l-5.4 2.9 1.2-5.9L3.4 9.4l6-.7z" fill="currentColor"/></svg></i>Favorite</span></span>
+      <svg class="ls-go" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9M9 4.5 12.5 8 9 11.5"/></svg>
+    </a>
+    <a class="ls-r" href="https://www.goodreads.com/book/show/139417550-the-power-of-e-q" target="_blank" rel="noopener">
+      <span class="ls-th" style="--th:128px"><img class="ls-cover" src="{{asset "images/lists/book-eq.jpg"}}" alt="The Power of E.Q. cover" width="96" height="128" loading="lazy" decoding="async"></span>
+      <span class="ls-tx"><b>The Power of E.Q.</b><span class="ls-sub">Patrick King</span><span class="ls-tg ls-tg--next"><i class="ls-tg-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5h10a1 1 0 0 1 1 1v16l-6-3.8-6 3.8v-16a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg></i>Up next</span></span>
+      <svg class="ls-go" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9M9 4.5 12.5 8 9 11.5"/></svg>
+    </a>
+    <a class="ls-r" href="https://www.goodreads.com/book/show/11468377-thinking-fast-and-slow" target="_blank" rel="noopener">
+      <span class="ls-th" style="--th:128px"><img class="ls-cover" src="{{asset "images/lists/book-thinking.jpg"}}" alt="Thinking, Fast and Slow cover" width="86" height="128" loading="lazy" decoding="async"></span>
+      <span class="ls-tx"><b>Thinking, Fast and Slow</b><span class="ls-sub">Daniel Kahneman</span><span class="ls-tg ls-tg--next"><i class="ls-tg-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5h10a1 1 0 0 1 1 1v16l-6-3.8-6 3.8v-16a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg></i>Up next</span></span>
+      <svg class="ls-go" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9M9 4.5 12.5 8 9 11.5"/></svg>
+    </a>
+  </div>
 </section>

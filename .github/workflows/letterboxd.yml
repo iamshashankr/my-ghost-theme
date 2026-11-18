@@ -1,0 +1,40 @@
+name: Sync Letterboxd
+
+# Once a day, refresh the "What I've been watching" list on the Lists page
+# from the public Letterboxd diary feed. Deploys only when something changed.
+on:
+  schedule:
+    - cron: '17 1 * * *'   # 06:47 IST
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Read the diary feed
+        run: python scripts/letterboxd.py
+
+      - name: Commit and deploy if changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- partials/lists-films.hbs; then
+            echo "Nothing new."
+            exit 0
+          fi
+          git config user.name "Shashank R"
+          git config user.email "iamshashankr@users.noreply.github.com"
+          git add partials/lists-films.hbs
+          git commit -m "Lists: latest watches from Letterboxd"
+          git push
+          gh workflow run deploy-theme.yml --ref main
