@@ -35,6 +35,34 @@ jobs:
               --only-categories=performance,seo,best-practices --output=json --output-path="out/lh-$name.json" || true
           done
 
+      - name: Summary
+        run: |
+          echo "===== ROBOTS ====="; cat out/robots.txt
+          echo "===== HOME HEADERS ====="; cat out/home-headers.txt
+          echo "===== HEAD TAGS (home) ====="; grep -oiE '<(title|meta|link)[^>]*>' out/home.html | grep -viE 'preload|stylesheet' | head -60
+          echo "===== JSON-LD (home) ====="; python3 - <<'PY'
+          import re
+          h=open('out/home.html').read()
+          for m in re.findall(r'<script type="application/ld\+json">(.*?)</script>', h, re.S): print(m.strip()[:1500]); print('---')
+          print('scripts:'); [print(' ', x) for x in re.findall(r'<script[^>]*src="([^"]+)"', h)]
+          print('stylesheets:'); [print(' ', x) for x in re.findall(r'<link[^>]*rel="stylesheet"[^>]*href="([^"]+)"', h)]
+          e=open('out/essay.html').read()
+          print('ESSAY JSON-LD:'); [print(m.strip()[:1500]) for m in re.findall(r'<script type="application/ld\+json">(.*?)</script>', e, re.S)]
+          PY
+          echo "===== LIGHTHOUSE ====="
+          for f in out/lh-*.json; do node -e '
+            const r=require(process.argv[1]); const a=r.audits, c=r.categories;
+            const ms=k=>a[k]&&a[k].displayValue;
+            console.log("\n## "+r.finalDisplayedUrl);
+            console.log("scores perf/seo/bp:", Object.values(c).map(x=>x.id+"="+Math.round(x.score*100)).join(" "));
+            console.log("FCP",ms("first-contentful-paint"),"| LCP",ms("largest-contentful-paint"),"| TBT",ms("total-blocking-time"),"| CLS",ms("cumulative-layout-shift"),"| SI",ms("speed-index"),"| TTFB",ms("server-response-time"));
+            console.log("total bytes:", ms("total-byte-weight"));
+            const lcp=a["largest-contentful-paint-element"]; if(lcp&&lcp.details){try{console.log("LCP element:", JSON.stringify(lcp.details.items[0].items?lcp.details.items[0].items[0].node.snippet:lcp.details.items[0].node.snippet).slice(0,240))}catch(e){}}
+            const items=(a["network-requests"].details.items||[]).sort((x,y)=>y.transferSize-x.transferSize).slice(0,14);
+            items.forEach(i=>console.log("  ",Math.round(i.transferSize/1024)+"K",Math.round(i.endTime-i.startTime)+"ms",i.resourceType,i.url.slice(0,110)));
+            ["render-blocking-resources","unused-javascript","uses-responsive-images","modern-image-formats","offscreen-images","unminified-css","bootup-time","third-party-summary","uses-long-cache-ttl"].forEach(k=>{ if(a[k]&&a[k].score!==null&&a[k].score<0.9) console.log("  FLAG",k,a[k].displayValue||"") });
+          ' "$PWD/$f" || echo "failed $f"; done
+
       - uses: actions/upload-artifact@v4
         with:
           name: site-check
