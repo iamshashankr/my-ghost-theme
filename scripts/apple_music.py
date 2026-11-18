@@ -21,7 +21,7 @@ OUT = ROOT / 'partials' / 'lists-artists.hbs'
 
 PLAY = '<svg class="ls-i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"/></svg>'
 PAUSE = '<svg class="ls-i-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="5" width="4" height="14" rx="1.2" fill="currentColor"/><rect x="13.5" y="5" width="4" height="14" rx="1.2" fill="currentColor"/></svg>'
-AR = ('<svg class="ls-ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" '
+GO = ('<svg class="ls-go" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" '
       'stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9M9 4.5 12.5 8 9 11.5"/></svg>')
 
 
@@ -70,8 +70,8 @@ def render(rows):
             '        </button>\n'
             '      </span>\n'
             '      <span class="ls-tx"><b>%s</b><span class="ls-sub"><i class="ls-eq" aria-hidden="true"><i></i><i></i><i></i></i>%s</span></span>\n'
-            '      <a class="ls-am" href="%s" target="_blank" rel="noopener">Apple Music%s</a>\n'
-            '    </div>' % (html.escape(r['preview']), s, a, pic, PLAY, PAUSE, a, s, html.escape(r['link']), AR))
+            '      <a class="ls-am" href="%s" target="_blank" rel="noopener" aria-label="Listen to %s by %s on Apple Music" title="Listen on Apple Music">%s</a>\n'
+            '    </div>' % (html.escape(r['preview']), s, a, pic, PLAY, PAUSE, a, s, html.escape(r['link']), s, a, GO))
     out += ['  </div>', '</section>', '']
     return '\n'.join(out)
 
