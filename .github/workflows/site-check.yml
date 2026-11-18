@@ -1,0 +1,41 @@
+name: Site check
+
+# Manual health check: Lighthouse speed scores for key pages, robots.txt,
+# and whether AI crawlers can fetch the site. Results are saved as a run artifact.
+on:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Crawler access
+        run: |
+          mkdir -p out
+          S=https://www.shaashank.com
+          curl -s "$S/robots.txt" > out/robots.txt
+          curl -s -D out/home-headers.txt -o out/home.html "$S/"
+          curl -s -o out/essay.html "$S/who-you-travel-with/"
+          for ua in "GPTBot/1.1" "OAI-SearchBot/1.0" "ChatGPT-User/1.0" "ClaudeBot/1.0" "Claude-User/1.0" "PerplexityBot/1.0" "Google-Extended" "Googlebot/2.1" "Bingbot/2.0" "Applebot-Extended/0.1" "CCBot/2.0"; do
+            code=$(curl -s -o /dev/null -w '%{http_code} %{size_download}B %{time_total}s' -A "Mozilla/5.0 (compatible; $ua)" "$S/who-you-travel-with/")
+            echo "$ua  $code" >> out/crawlers.txt
+          done
+          curl -s -o /dev/null -w 'sitemap %{http_code}\n' "$S/sitemap.xml" >> out/crawlers.txt
+          cat out/crawlers.txt
+
+      - name: Lighthouse (mobile)
+        run: |
+          for p in "" "writing/" "lists/" "about/" "who-you-travel-with/"; do
+            name=$(echo "${p:-home}" | tr -d '/')
+            npx -y lighthouse@12 "https://www.shaashank.com/$p" --quiet --chrome-flags="--headless=new --no-sandbox" \
+              --only-categories=performance,seo,best-practices --output=json --output-path="out/lh-$name.json" || true
+          done
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site-check
+          path: out
