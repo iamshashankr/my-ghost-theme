@@ -18,7 +18,7 @@ jobs:
           mkdir -p out
           S=https://www.shaashank.com
           curl -s "$S/robots.txt" > out/robots.txt
-          curl -s -D out/home-headers.txt -o out/home.html "$S/"
+          curl -s -D out/home-headers.txt -o out/home.html "$S/?fresh=$GITHUB_RUN_ID"
           curl -s -o out/essay.html "$S/who-you-travel-with/"
           for ua in "GPTBot/1.1" "OAI-SearchBot/1.0" "ChatGPT-User/1.0" "ClaudeBot/1.0" "Claude-User/1.0" "PerplexityBot/1.0" "Google-Extended" "Googlebot/2.1" "Bingbot/2.0" "Applebot-Extended/0.1" "CCBot/2.0"; do
             code=$(curl -s -o /dev/null -w '%{http_code} %{size_download}B %{time_total}s' -A "Mozilla/5.0 (compatible; $ua)" "$S/who-you-travel-with/")
@@ -31,7 +31,7 @@ jobs:
         run: |
           for p in ${PAGES:-"" "writing/" "lists/" "about/" "who-you-travel-with/"}; do
             name=$(echo "${p:-home}" | tr -d '/')
-            npx -y lighthouse@12 "https://www.shaashank.com/$p" --quiet --chrome-flags="--headless=new --no-sandbox" \
+            npx -y lighthouse@12 "https://www.shaashank.com/$p?fresh=$GITHUB_RUN_ID" --quiet --chrome-flags="--headless=new --no-sandbox" \
               --only-categories=performance,seo,best-practices --output=json --output-path="out/lh-$name.json" || true
           done
 
