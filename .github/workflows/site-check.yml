@@ -29,7 +29,7 @@ jobs:
 
       - name: Lighthouse (mobile)
         run: |
-          for p in "" "writing/" "lists/" "about/" "who-you-travel-with/"; do
+          for p in ${PAGES:-"" "writing/" "lists/" "about/" "who-you-travel-with/"}; do
             name=$(echo "${p:-home}" | tr -d '/')
             npx -y lighthouse@12 "https://www.shaashank.com/$p" --quiet --chrome-flags="--headless=new --no-sandbox" \
               --only-categories=performance,seo,best-practices --output=json --output-path="out/lh-$name.json" || true
@@ -47,6 +47,8 @@ jobs:
           print('scripts:'); [print(' ', x) for x in re.findall(r'<script[^>]*src="([^"]+)"', h)]
           print('stylesheets:'); [print(' ', x) for x in re.findall(r'<link[^>]*rel="stylesheet"[^>]*href="([^"]+)"', h)]
           e=open('out/essay.html').read()
+          print('PORTAL/SEARCH TAGS:'); [print(' ', x) for x in re.findall(r'<script[^>]*(?:portal|sodo-search)[^>]*></script>', h)]
+          print('LINKS TO PORTAL:', len(re.findall(r'data-portal|#/portal', h)))
           print('ESSAY JSON-LD:'); [print(m.strip()[:1500]) for m in re.findall(r'<script type="application/ld\+json">(.*?)</script>', e, re.S)]
           PY
           echo "===== LIGHTHOUSE ====="
@@ -60,6 +62,10 @@ jobs:
             const lcp=a["largest-contentful-paint-element"]; if(lcp&&lcp.details){try{console.log("LCP element:", JSON.stringify(lcp.details.items[0].items?lcp.details.items[0].items[0].node.snippet:lcp.details.items[0].node.snippet).slice(0,240))}catch(e){}}
             const items=(a["network-requests"].details.items||[]).sort((x,y)=>y.transferSize-x.transferSize).slice(0,14);
             items.forEach(i=>console.log("  ",Math.round(i.transferSize/1024)+"K",Math.round(i.endTime-i.startTime)+"ms",i.resourceType,i.url.slice(0,110)));
+            const bt=a["bootup-time"]; if(bt&&bt.details) bt.details.items.slice(0,6).forEach(i=>console.log("   JS",Math.round(i.total)+"ms",String(i.url).slice(0,100)));
+            const mt=a["mainthread-work-breakdown"]; if(mt&&mt.details) console.log("   main thread:", mt.details.items.slice(0,5).map(i=>i.groupLabel+" "+Math.round(i.duration)+"ms").join(", "));
+            const ls=a["layout-shifts"]||a["layout-shift-elements"]; if(ls&&ls.details) ls.details.items.slice(0,4).forEach(i=>console.log("   SHIFT",(i.score||0).toFixed(3),JSON.stringify(i.node&&i.node.snippet||"").slice(0,160)));
+            const lt=a["long-tasks"]; if(lt&&lt.details) lt.details.items.slice(0,6).forEach(i=>console.log("   LONG",Math.round(i.duration)+"ms",String(i.url).slice(0,100)));
             ["render-blocking-resources","unused-javascript","uses-responsive-images","modern-image-formats","offscreen-images","unminified-css","bootup-time","third-party-summary","uses-long-cache-ttl"].forEach(k=>{ if(a[k]&&a[k].score!==null&&a[k].score<0.9) console.log("  FLAG",k,a[k].displayValue||"") });
           ' "$PWD/$f" || echo "failed $f"; done
 
