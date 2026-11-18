@@ -469,7 +469,7 @@ a.ls-r:hover .ls-go{color:var(--txt);transform:translateX(2px)}
 .ls-icon--pad{padding:12px}
 .ls-icon--bleed{background:transparent;box-shadow:0 8px 16px -10px rgba(0,0,0,.35)}
 .ls-cover,.ls-poster,.ls-ph,.ls-icon,.ls-round,.ls-land{transition:transform .35s cubic-bezier(.3,1.4,.5,1)}
-a.ls-r:hover .ls-cover,a.ls-r:hover .ls-poster,a.ls-r:hover .ls-ph,a.ls-r:hover .ls-icon{transform:translateY(-3px)}
+a.ls-r:hover .ls-cover,a.ls-r:hover .ls-poster,a.ls-r:hover .ls-ph,a.ls-r:hover .ls-icon,a.ls-r:hover .ls-land,a.ls-r:hover .ls-round{transform:translateY(-3px)}
 
 .ls-tg{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px 0 8px;border-radius:999px;font-size:11.5px;font-weight:600;line-height:1;white-space:nowrap;vertical-align:top}
 .ls-tg-ic{display:inline-flex;align-items:center;justify-content:center;width:12px;height:12px;flex-shrink:0}
