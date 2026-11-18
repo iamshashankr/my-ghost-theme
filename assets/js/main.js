@@ -374,3 +374,32 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initReadBar); else initReadBar();
 })();
+
+/* Lists: Apple Music 30-second previews, one at a time */
+(function(){
+  var audio = null, row = null, raf = 0, C = 295.31;
+  function ring(r, p){ var c = r && r.querySelector('.ls-ring circle'); if (c) c.style.strokeDashoffset = (C * (1 - p)).toFixed(2); }
+  function tick(){ if (row && audio && audio.duration) ring(row, audio.currentTime / audio.duration); raf = audio && !audio.paused ? requestAnimationFrame(tick) : 0; }
+  function setState(r, on, playing){
+    if (!r) return;
+    r.classList.toggle('is-on', on); r.classList.toggle('is-playing', playing);
+    var b = r.querySelector('.ls-play'); if (b) b.setAttribute('aria-pressed', playing ? 'true' : 'false');
+  }
+  function stop(){ if (!row) return; audio.pause(); setState(row, false, false); ring(row, 0); row = null; }
+  function play(){ var p = audio.play(); if (p && p.catch) p.catch(function(){ stop(); }); setState(row, true, true); cancelAnimationFrame(raf); raf = requestAnimationFrame(tick); }
+  document.addEventListener('click', function(e){
+    var r = e.target.closest && e.target.closest('.ls-song');
+    if (!r || e.target.closest('.ls-am')) return;
+    var src = r.querySelector('[data-preview]'); if (!src) return;
+    if (!audio){
+      audio = new Audio(); audio.preload = 'none'; audio.volume = 0.8;
+      audio.addEventListener('ended', stop);
+    }
+    if (row === r){
+      if (audio.paused) play(); else { audio.pause(); setState(row, true, false); }
+      return;
+    }
+    stop(); row = r; audio.src = src.getAttribute('data-preview'); play();
+  });
+  document.addEventListener('visibilitychange', function(){ if (document.hidden && audio && !audio.paused){ audio.pause(); setState(row, true, false); } });
+})();

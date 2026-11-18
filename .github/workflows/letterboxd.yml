@@ -1,7 +1,7 @@
-name: Sync Letterboxd
+name: Sync Lists
 
-# Once a day, refresh the "What I've been watching" list on the Lists page
-# from the public Letterboxd diary feed. Deploys only when something changed.
+# Once a day, refresh the Lists page: latest watches from the public Letterboxd
+# diary feed, and Apple Music previews for the artists. Deploys only when something changed.
 on:
   schedule:
     - cron: '17 1 * * *'   # 06:47 IST
@@ -22,19 +22,24 @@ jobs:
           python-version: '3.12'
 
       - name: Read the diary feed
+        continue-on-error: true
         run: python scripts/letterboxd.py
+
+      - name: Refresh Apple Music previews
+        continue-on-error: true
+        run: python scripts/apple_music.py
 
       - name: Commit and deploy if changed
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if git diff --quiet -- partials/lists-films.hbs; then
+          if git diff --quiet -- partials/lists-films.hbs partials/lists-artists.hbs; then
             echo "Nothing new."
             exit 0
           fi
           git config user.name "Shashank R"
           git config user.email "iamshashankr@users.noreply.github.com"
-          git add partials/lists-films.hbs
-          git commit -m "Lists: latest watches from Letterboxd"
+          git add partials/lists-films.hbs partials/lists-artists.hbs
+          git commit -m "Lists: daily refresh (Letterboxd, Apple Music)"
           git push
           gh workflow run deploy-theme.yml --ref main

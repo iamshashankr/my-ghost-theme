@@ -482,6 +482,36 @@ a.ls-r:hover .ls-cover,a.ls-r:hover .ls-poster,a.ls-r:hover .ls-ph,a.ls-r:hover 
 .ls-tg--next{background:var(--ls-ph);color:#77776f}
 .ls-rate{display:block;font-size:13px;line-height:1;letter-spacing:.08em;color:#5cb836}
 
+/* artists: Apple Music previews */
+.ls-song{cursor:pointer}
+.ls-song:hover{background:var(--ls-hover)}
+.ls-song:hover::before,.ls-song:hover+.ls-r::before{opacity:0}
+.ls-play{position:relative;display:block;width:88px;height:88px;padding:0;border:0;border-radius:50%;background:var(--ls-ph);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.ls-play:focus-visible{outline:2px solid var(--acc);outline-offset:4px}
+.ls-play .ls-round{width:100%;height:100%;transition:transform .45s cubic-bezier(.3,1.4,.5,1),filter .3s ease}
+.ls-ring{position:absolute;inset:-6px;width:calc(100% + 12px);height:calc(100% + 12px);transform:rotate(-90deg);pointer-events:none;opacity:0;transition:opacity .25s ease}
+.ls-ring circle{fill:none;stroke:var(--acc);stroke-width:3;stroke-linecap:round;stroke-dasharray:295.31;stroke-dashoffset:295.31}
+.ls-pbtn{position:absolute;left:50%;top:50%;display:flex;align-items:center;justify-content:center;width:36px;height:36px;margin:-18px 0 0 -18px;border-radius:50%;background:rgba(255,255,255,.94);color:#111;box-shadow:0 4px 14px -4px rgba(0,0,0,.45);opacity:0;transform:scale(.85);transition:opacity .2s ease,transform .3s cubic-bezier(.3,1.5,.5,1)}
+.ls-pbtn svg{width:16px;height:16px}
+.ls-i-play{margin-left:2px}
+.ls-i-pause{display:none}
+.ls-song:hover .ls-pbtn,.ls-play:focus-visible .ls-pbtn,.ls-song.is-on .ls-pbtn{opacity:1;transform:none}
+.ls-song:hover .ls-round{filter:brightness(.88)}
+.ls-song.is-on .ls-ring{opacity:1}
+.ls-song.is-playing .ls-i-play{display:none}
+.ls-song.is-playing .ls-i-pause{display:block}
+.ls-song.is-playing .ls-round{transform:scale(.94)}
+.ls-eq{display:none;align-items:flex-end;gap:2px;height:10px;margin-right:7px;vertical-align:-1px}
+.ls-eq i{display:block;width:2px;height:100%;border-radius:1px;background:var(--acc);transform-origin:bottom;animation:lsEq .9s ease-in-out infinite}
+.ls-eq i:nth-child(2){animation-delay:-.3s}.ls-eq i:nth-child(3){animation-delay:-.6s}
+@keyframes lsEq{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
+.ls-song.is-playing .ls-eq{display:inline-flex}
+.ls-am{flex-shrink:0;display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;line-height:1;color:var(--soft);text-decoration:none;opacity:.85;transition:color .2s ease,opacity .2s ease}
+.ls-am:hover{color:var(--txt);opacity:1}
+.ls-am:hover .ls-ar{transform:translateX(2px)}
+@media(prefers-reduced-motion:reduce){.ls-eq i{animation:none}}
+@media(max-width:600px){.ls-play{width:64px;height:64px}.ls-pbtn{width:30px;height:30px;margin:-15px 0 0 -15px}.ls-pbtn svg{width:14px;height:14px}.ls-am{font-size:0;gap:0}.ls-am .ls-ar{width:16px;height:16px}}
+
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .lists-page{--ls-hover:rgba(255,255,255,.045);--ls-line:#222;--ls-ph:#1c1c1c;--ls-ph-ink:#555;--ls-go:#555;--ls-tile:#f4f4f2}
 :root:not([data-theme="light"]) .ls-tg--now{background:rgba(126,217,87,.14);color:var(--acc)}
 :root:not([data-theme="light"]) .ls-tg--fav{background:rgba(227,174,60,.14);color:#e9bf62}
