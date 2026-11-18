@@ -81,7 +81,7 @@ def main():
     for item in json.loads(CONFIG.read_text()):
         t = lookup(item['apple'])
         rows.append({'artist': item['artist'], 'song': clean_title(t['trackName']), 'preview': t['previewUrl'],
-                     'art': t['artworkUrl100'].replace('100x100bb', '300x300bb'), 'photo': item.get('photo'),
+                     'art': t['artworkUrl100'].replace('100x100bb', '200x200bb'), 'photo': item.get('photo'),
                      'link': item['apple']})
     new = render(rows)
     old = OUT.read_text() if OUT.exists() else ''

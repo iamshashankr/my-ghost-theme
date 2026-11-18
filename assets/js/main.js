@@ -336,7 +336,10 @@
     });
     stage.addEventListener('pointercancel', function(){ startX = null; });
     var t; window.addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(layout, 120); });
-    layout();
+    /* first placement without the spring animation (saves work on load) */
+    cards.forEach(function(c){ c.style.transition = 'none'; });
+    layout(); void stage.offsetWidth;
+    requestAnimationFrame(function(){ cards.forEach(function(c){ c.style.transition = ''; }); });
   }
   function initNowDecks(){ document.querySelectorAll('[data-now-deck]').forEach(initNowDeck); }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initNowDecks);
@@ -402,4 +405,33 @@
     stop(); row = r; audio.src = src.getAttribute('data-preview'); play();
   });
   document.addEventListener('visibilitychange', function(){ if (document.hidden && audio && !audio.paused){ audio.pause(); setState(row, true, false); } });
+})();
+
+/* Ghost Portal (account, unsubscribe and sign-in screens) is excluded from {{ghost_head}}
+   to keep pages light. It's only needed when a visitor arrives from an email link
+   (…/#/portal/…, ?uuid=…, ?action=…), so load it on demand then. */
+(function(){
+  var loaded = false;
+  function needed(){
+    var h = location.hash || '', q = location.search || '';
+    return h.indexOf('#/portal') === 0 || /[?&](uuid|action|stripe|success)=/.test(q);
+  }
+  function load(){
+    if (loaded) return; loaded = true;
+    var s = document.createElement('script');
+    s.src = '/content/files/ghost-apps/portal/portal.min.js';
+    s.defer = true; s.crossOrigin = 'anonymous';
+    s.setAttribute('data-i18n', 'true');
+    s.setAttribute('data-ghost', location.origin + '/');
+    s.setAttribute('data-key', '23eedec350316d9b22f542a58d');
+    s.setAttribute('data-api', location.origin + '/ghost/api/content/');
+    s.setAttribute('data-locale', 'en');
+    document.head.appendChild(s);
+  }
+  if (needed()) load();
+  window.addEventListener('hashchange', function(){ if (needed()) load(); });
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href*="#/portal"], [data-portal]');
+    if (a) load();
+  });
 })();

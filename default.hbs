@@ -5,15 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{meta_title}}</title>
-    <meta property="og:site_name" content="{{@site.title}}">
-    <meta property="og:type" content="{{#is "post"}}article{{else}}website{{/is}}">
-    <meta property="og:title" content="{{meta_title}}">
-    <meta property="og:url" content="{{url absolute="true"}}">
-    {{#if @site.cover_image}}<meta property="og:image" content="{{@site.cover_image}}">{{/if}}
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="preload" href="{{asset 'fonts/plus-jakarta-sans.woff2'}}" as="font" type="font/woff2" crossorigin>
+    {{!-- Same URL as the @font-face in screen.css (no ?v=), so the browser downloads the font once --}}
+    <link rel="preload" href="/assets/fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" type="text/css" href="{{asset 'css/screen.css'}}">
-    {{ghost_head}}
+    {{!-- Ghost's search and Portal scripts aren't used by this theme; main.js loads Portal only for #/portal links --}}
+    {{ghost_head exclude="search,portal"}}
 </head>
 <body class="{{body_class}}">
 <div class="site-wrapper">

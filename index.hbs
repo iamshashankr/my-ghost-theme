@@ -1,5 +1,7 @@
 {{!< default}}
 
+{{> "person-schema"}}
+
 <div class="home-page">
   <div class="inner">
 
@@ -47,6 +49,8 @@
         </li>
         {{/foreach}}
       </ol>
+      {{!-- Group months before first paint so the list doesn't jump (same logic as initTimeline) --}}
+      <script>(function(){var c=['#E3AE3C','#C8402F','#3F8A5C','#2E5C9E'],p=null,n=-1,l=document.currentScript.previousElementSibling;l&&l.querySelectorAll('.tl-item').forEach(function(i){var m=i.getAttribute('data-month');if(m===p)i.classList.add('is-cont');else{n++;i.style.setProperty('--dot',c[n%c.length]);}p=m;});})();</script>
     </section>
     {{/get}}
 

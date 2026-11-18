@@ -51,7 +51,8 @@ def entries(xml_bytes):
             'date': date.fromisoformat(watched.strip()),
             'rating': float(rating) if rating else None,
             'link': (item.findtext('link') or '').strip(),
-            'poster': m.group(1) if m else '',
+            # 230x345 is plenty for an 80x120 thumbnail on retina screens
+            'poster': re.sub(r'-0-\d+-0-\d+-crop', '-0-230-0-345-crop', m.group(1)) if m else '',
         })
     out.sort(key=lambda e: e['date'], reverse=True)
     return out[:COUNT]

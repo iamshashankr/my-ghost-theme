@@ -1,6 +1,8 @@
 {{!< default}}
 {{!-- Template Name: About --}}
 
+{{> "person-schema"}}
+
 <div class="about-page">
   <div class="inner">
 
@@ -17,7 +19,7 @@
          sizes="(max-width: 824px) calc(100vw - 36px), 760px"
          alt="Shashank R" width="1000" height="667" fetchpriority="high" decoding="async">
     {{else}}
-    <img src="{{asset 'images/avatar.jpg'}}" alt="Shashank R" width="1080" height="1440" fetchpriority="high" decoding="async">
+    <img src="{{asset 'images/avatar.webp'}}" srcset="{{asset 'images/avatar-720.webp'}} 720w, {{asset 'images/avatar.webp'}} 1080w" sizes="(max-width: 824px) calc(100vw - 36px), 760px" alt="Shashank R" width="1080" height="1440" fetchpriority="high">
     {{/if}}
   </figure>
 
